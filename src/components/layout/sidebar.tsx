@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutGrid,
   Book,
@@ -18,14 +18,32 @@ import {
   ChevronRight,
   PanelLeftClose,
   PanelLeft,
+  LogOut,
 } from "lucide-react";
 import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { cn } from "@/lib/utils";
+import { authClient, signOut } from "@/lib/auth-client";
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
   const { isCollapsed, toggleSidebar } = useSidebarStore();
   const [projectsOpen, setProjectsOpen] = useState(true);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            window.location.href = "/sign-in";
+          },
+        },
+      });
+    } catch {
+      window.location.href = "/sign-in";
+    }
+  };
 
   const dashboardNav = [
     { title: "Overview", href: "/overview", icon: LayoutGrid },
@@ -294,6 +312,18 @@ export function AppSidebar() {
                 </Link>
               );
             })}
+
+            <button
+              onClick={handleSignOut}
+              title={isCollapsed ? "Sign Out" : undefined}
+              className={cn(
+                "flex w-full items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-[#E5484D] font-[400] hover:bg-[#FFE8EA] transition-colors",
+                isCollapsed && "justify-center px-0"
+              )}
+            >
+              <LogOut className="h-5 w-5 text-[#E5484D] shrink-0" strokeWidth={1.5} />
+              {!isCollapsed && <span className="truncate">Sign Out</span>}
+            </button>
           </nav>
         </div>
       </div>

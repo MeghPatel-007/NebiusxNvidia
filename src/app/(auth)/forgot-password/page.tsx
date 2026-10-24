@@ -24,6 +24,10 @@ export default function ForgotPasswordPage() {
 
     setLoading(true);
     try {
+      if (!forgetPassword) {
+        throw new Error("Password recovery client is not initialized.");
+      }
+
       const response = await forgetPassword({
         email: email.trim(),
         redirectTo: "/reset-password",

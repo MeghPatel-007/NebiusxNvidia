@@ -1,14 +1,26 @@
 import React, { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { getServerSession } from "@/lib/authorization";
 import { AppSidebar } from "@/components/layout/sidebar";
 import { AppHeader } from "@/components/layout/header";
 
 export const instant = false;
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const sessionData = await getServerSession();
+
+  if (!sessionData || !sessionData.session || !sessionData.user) {
+    redirect("/sign-in");
+  }
+
+  if (!sessionData.user.emailVerified) {
+    redirect(`/verify-email?email=${encodeURIComponent(sessionData.user.email)}`);
+  }
+
   return (
     <div className="flex min-h-screen bg-white text-[#111111]">
       {/* Persistent Left Sidebar (width: 203px, hairline border-r #EBEBEF) */}
@@ -26,4 +38,3 @@ export default function DashboardLayout({
     </div>
   );
 }
-

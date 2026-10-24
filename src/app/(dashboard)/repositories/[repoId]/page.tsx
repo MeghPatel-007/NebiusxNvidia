@@ -6,10 +6,12 @@ import {
   GitBranch,
   Sparkles,
   ExternalLink,
+  GitCommit,
 } from "lucide-react";
 import { getRepositoryById } from "@/lib/db/queries/repositories";
 import { getAgentRuns } from "@/lib/db/queries/agent-runs";
 import { RepoBreadcrumbs } from "@/components/layout/breadcrumbs";
+import { RepositoryCommitHistory } from "@/components/repositories/repository-commit-history";
 
 export const instant = false;
 
@@ -78,6 +80,20 @@ export default async function RepositoryDetailPage({
           </div>
 
           <p className="text-[14.5px] text-[#3A3A42] mt-4">{repo.description}</p>
+        </div>
+
+        {/* Recent GitHub Commits */}
+        <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
+          <div>
+            <h2 className="text-[18px] font-[500] text-[#111111] flex items-center gap-2">
+              <GitCommit className="h-4 w-4 text-[#8A8A94]" />
+              <span>Recent Commits</span>
+            </h2>
+            <p className="text-[13px] text-[#8A8A94]">
+              Latest commit history and verification status fetched via GitHub integration.
+            </p>
+          </div>
+          <RepositoryCommitHistory repoId={repo.id} branch={repo.defaultBranch} />
         </div>
 
         {/* Runs History Table for this Repo */}

@@ -131,7 +131,7 @@ export function renderVerificationEmail({ name, url }: TemplateParams) {
 export function renderPasswordResetEmail({ name, url }: TemplateParams) {
   const greeting = name ? `Hello ${name},` : "Hello,";
   const intro = `${greeting} we received a request to reset the password for your ${BRAND_NAME} account. Click below to choose a new password.`;
-  const secondaryNote = "For security reasons, this link is valid for a limited time and can only be used once. If you did not request a password reset, no further action is required and your account remains secure.";
+  const secondaryNote = "For security reasons, this single-use link is valid for a limited time and can only be used once. If you did not request a password reset, no further action is required and your account remains secure.";
 
   const html = baseEmailTemplate({
     headline: "Reset your password",

@@ -52,6 +52,9 @@ function ResetPasswordForm() {
 
     setLoading(true);
     try {
+      if (!resetPassword) {
+        throw new Error("Reset password function not available");
+      }
       const response = await resetPassword({
         newPassword: password,
         token,

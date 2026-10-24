@@ -12,18 +12,24 @@ let cachedAdapter: EmailAdapter | null = null;
 export function getEmailAdapter(): EmailAdapter {
   if (cachedAdapter) return cachedAdapter;
 
+  // In test environment or when explicitly forced to memory, use in-memory adapter
+  if (process.env.NODE_ENV === "test" || process.env.EMAIL_ADAPTER === "memory") {
+    cachedAdapter = memoryEmailAdapter;
+    return cachedAdapter;
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (apiKey && apiKey.trim().length > 0) {
     cachedAdapter = new ResendEmailAdapter(apiKey.trim());
     return cachedAdapter;
   }
 
-  // Development and test fallback
+  // Development fallback
   cachedAdapter = memoryEmailAdapter;
   return cachedAdapter;
 }
 
-// For unit testing only: allow injecting a mock adapter or resetting
+// For testing only: allow injecting or resetting adapter
 export function setEmailAdapterForTesting(adapter: EmailAdapter | null): void {
   cachedAdapter = adapter;
 }
