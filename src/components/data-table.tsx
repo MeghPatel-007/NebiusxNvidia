@@ -95,7 +95,15 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { GripVerticalIcon, CircleCheckIcon, LoaderIcon, EllipsisVerticalIcon, Columns3Icon, ChevronDownIcon, PlusIcon, ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, TrendingUpIcon } from "lucide-react"
+import { GripVerticalIcon, CircleCheckIcon, LoaderIcon, EllipsisVerticalIcon, Columns3Icon, ChevronDownIcon, PlusIcon, ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, TrendingUpIcon, SearchIcon } from "lucide-react"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 // New in v9: declare the features this table uses — anything you don't
 // register is tree-shaken out of the bundle.
@@ -295,30 +303,49 @@ const columns = columnHelper.columns([
   }),
   columnHelper.display({
     id: "actions",
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          render={
-            <Button
-              variant="ghost"
-              className="flex size-8 text-muted-foreground data-open:bg-muted"
-              size="icon"
-            />
-          }
-        >
-          <EllipsisVerticalIcon
+    cell: ({ row, table }) => {
+      const meta = table.options.meta as {
+        duplicateRow?: (row: z.infer<typeof schema>) => void
+        deleteRow?: (id: number, header: string) => void
+        favoriteRow?: (header: string) => void
+      } | undefined
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <Button
+                variant="ghost"
+                className="flex size-8 text-muted-foreground data-open:bg-muted"
+                size="icon"
+                aria-label={`Actions for ${row.original.header}`}
+              >
+                <EllipsisVerticalIcon className="size-4" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            }
           />
-          <span className="sr-only">Open menu</span>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+          <DropdownMenuContent align="end" className="w-36">
+            <DropdownMenuItem onClick={() => toast.info(`Viewing details for ${row.original.header}`)}>
+              View details
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => meta?.duplicateRow?.(row.original)}>
+              Make a copy
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => meta?.favoriteRow?.(row.original.header)}>
+              Favorite
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => meta?.deleteRow?.(row.original.id, row.original.header)}
+            >
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
   }),
 ])
 function DraggableRow({
@@ -365,6 +392,60 @@ export function DataTable({
     pageIndex: 0,
     pageSize: 10,
   })
+
+  // Add Section state
+  const [isAddOpen, setIsAddOpen] = React.useState(false)
+  const [newHeader, setNewHeader] = React.useState("")
+  const [newType, setNewType] = React.useState("Narrative")
+  const [newTarget, setNewTarget] = React.useState("10")
+  const [newLimit, setNewLimit] = React.useState("15")
+  const [newReviewer, setNewReviewer] = React.useState("Eddie Lake")
+
+  const handleAddSection = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!newHeader.trim()) {
+      toast.error("Please enter a section title")
+      return
+    }
+    const newRow = {
+      id: Date.now(),
+      header: newHeader.trim(),
+      type: newType,
+      status: "In Process",
+      target: newTarget || "10",
+      limit: newLimit || "15",
+      reviewer: newReviewer,
+    }
+    setData((prev) => [newRow, ...prev])
+    setNewHeader("")
+    setIsAddOpen(false)
+    toast.success(`Section "${newRow.header}" added successfully`)
+  }
+
+  const meta = React.useMemo(() => ({
+    duplicateRow: (item: z.infer<typeof schema>) => {
+      const newItem = {
+        ...item,
+        id: Date.now(),
+        header: `${item.header} (Copy)`,
+      }
+      setData((prev) => [newItem, ...prev])
+      toast.success(`Duplicated "${item.header}"`)
+    },
+    deleteRow: (id: number, header: string) => {
+      setData((prev) => prev.filter((d) => d.id !== id))
+      toast.success(`Removed "${header}"`)
+    },
+    favoriteRow: (header: string) => {
+      toast.success(`Added "${header}" to favorites`)
+    },
+    updateRowField: (id: number, field: "target" | "limit" | "reviewer" | "status", value: string) => {
+      setData((prev) =>
+        prev.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+      )
+    },
+  }), [])
+
   const sortableId = React.useId()
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
@@ -386,6 +467,7 @@ export function DataTable({
       columnFilters,
       pagination,
     },
+    meta,
     getRowId: (row) => row.id.toString(),
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -449,6 +531,15 @@ export function DataTable({
           <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
+          <div className="relative w-40 sm:w-56">
+            <SearchIcon className="pointer-events-none absolute left-2.5 top-2.5 size-3.5 text-muted-foreground" />
+            <Input
+              placeholder="Search matrix..."
+              value={(table.getColumn("header")?.getFilterValue() as string) ?? ""}
+              onChange={(e) => table.getColumn("header")?.setFilterValue(e.target.value)}
+              className="h-8 pl-8 text-xs"
+            />
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger
               render={<Button variant="outline" size="sm" />}
@@ -481,11 +572,105 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
-            <PlusIcon
-            />
-            <span className="hidden lg:inline">Add Section</span>
-          </Button>
+
+          <Sheet open={isAddOpen} onOpenChange={setIsAddOpen}>
+            <SheetTrigger render={<Button variant="outline" size="sm" />}>
+              <PlusIcon className="size-3.5" />
+              <span className="hidden lg:inline">Add Section</span>
+            </SheetTrigger>
+            <SheetContent className="sm:max-w-md">
+              <SheetHeader>
+                <SheetTitle>Add Section</SheetTitle>
+                <SheetDescription>
+                  Add a new engineering document or specification section to this matrix.
+                </SheetDescription>
+              </SheetHeader>
+              <form onSubmit={handleAddSection} className="space-y-4 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="section-header">Section Name</Label>
+                  <Input
+                    id="section-header"
+                    placeholder="e.g. Architecture and Design"
+                    value={newHeader}
+                    onChange={(e) => setNewHeader(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="section-type">Section Type</Label>
+                  <Select
+                    defaultValue={newType}
+                    onValueChange={(val) => val && setNewType(val)}
+                    items={[
+                      { label: "Narrative", value: "Narrative" },
+                      { label: "Technical approach", value: "Technical approach" },
+                      { label: "Table of contents", value: "Table of contents" },
+                      { label: "Cover page", value: "Cover page" },
+                      { label: "Capabilities", value: "Capabilities" },
+                    ]}
+                  >
+                    <SelectTrigger id="section-type">
+                      <SelectValue placeholder="Select type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Narrative">Narrative</SelectItem>
+                      <SelectItem value="Technical approach">Technical approach</SelectItem>
+                      <SelectItem value="Table of contents">Table of contents</SelectItem>
+                      <SelectItem value="Cover page">Cover page</SelectItem>
+                      <SelectItem value="Capabilities">Capabilities</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="section-target">Target</Label>
+                    <Input
+                      id="section-target"
+                      value={newTarget}
+                      onChange={(e) => setNewTarget(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="section-limit">Limit</Label>
+                    <Input
+                      id="section-limit"
+                      value={newLimit}
+                      onChange={(e) => setNewLimit(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="section-reviewer">Assigned Reviewer</Label>
+                  <Select
+                    defaultValue={newReviewer}
+                    onValueChange={(val) => val && setNewReviewer(val)}
+                    items={[
+                      { label: "Eddie Lake", value: "Eddie Lake" },
+                      { label: "Jamik Tashpulatov", value: "Jamik Tashpulatov" },
+                      { label: "Unassigned", value: "Assign reviewer" },
+                    ]}
+                  >
+                    <SelectTrigger id="section-reviewer">
+                      <SelectValue placeholder="Select reviewer" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
+                      <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
+                      <SelectItem value="Assign reviewer">Unassigned</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex justify-end gap-2 pt-4">
+                  <Button type="button" variant="outline" onClick={() => setIsAddOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button type="submit">
+                    Save Section
+                  </Button>
+                </div>
+              </form>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
       <TabsContent
@@ -628,18 +813,103 @@ export function DataTable({
       </TabsContent>
       <TabsContent
         value="past-performance"
-        className="flex flex-col px-4 lg:px-6"
+        className="flex flex-col gap-4 px-4 lg:px-6"
       >
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+        <div className="rounded-lg border bg-card p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-base font-semibold">Completed Specifications</h3>
+              <p className="text-xs text-muted-foreground">
+                All sections verified and signed off as Done.
+              </p>
+            </div>
+            <Badge variant="outline" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+              {data.filter((item) => item.status === "Done").length} Completed
+            </Badge>
+          </div>
+          <div className="divide-y rounded-md border text-sm">
+            {data
+              .filter((item) => item.status === "Done")
+              .map((item) => (
+                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 gap-2">
+                  <div className="flex items-center gap-2">
+                    <CircleCheckIcon className="size-4 text-emerald-500 shrink-0" />
+                    <span className="font-medium text-foreground">{item.header}</span>
+                    <Badge variant="outline" className="text-[11px] px-1.5 py-0">{item.type}</Badge>
+                  </div>
+                  <div className="flex items-center gap-4 text-muted-foreground text-xs">
+                    <span>Target: {item.target} / Limit: {item.limit}</span>
+                    <span className="font-medium text-foreground">{item.reviewer}</span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </TabsContent>
-      <TabsContent value="key-personnel" className="flex flex-col px-4 lg:px-6">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="key-personnel" className="flex flex-col gap-4 px-4 lg:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {["Eddie Lake", "Jamik Tashpulatov"].map((reviewer) => {
+            const assigned = data.filter((item) => item.reviewer === reviewer)
+            const completed = assigned.filter((item) => item.status === "Done")
+            const pending = assigned.length - completed.length
+            return (
+              <div key={reviewer} className="rounded-lg border bg-card p-5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-base text-foreground">{reviewer}</h3>
+                    <p className="text-xs text-muted-foreground">Principal Technical Lead</p>
+                  </div>
+                  <Badge variant="outline">{assigned.length} Sections</Badge>
+                </div>
+                <div className="grid grid-cols-2 gap-2 pt-2 text-xs">
+                  <div className="rounded-md border p-2 bg-muted/40">
+                    <span className="text-muted-foreground block">Completed</span>
+                    <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{completed.length}</span>
+                  </div>
+                  <div className="rounded-md border p-2 bg-muted/40">
+                    <span className="text-muted-foreground block">In Progress</span>
+                    <span className="text-lg font-bold text-foreground">{pending}</span>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </TabsContent>
       <TabsContent
         value="focus-documents"
-        className="flex flex-col px-4 lg:px-6"
+        className="flex flex-col gap-4 px-4 lg:px-6"
       >
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+        <div className="rounded-lg border bg-card p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-base font-semibold">Priority Architecture Sections</h3>
+              <p className="text-xs text-muted-foreground">
+                Critical path narrative and engineering sections.
+              </p>
+            </div>
+            <Badge variant="secondary">Critical Scope</Badge>
+          </div>
+          <div className="divide-y rounded-md border text-sm">
+            {data
+              .filter((item) => Number(item.target) >= 15 || item.type === "Narrative")
+              .slice(0, 6)
+              .map((item) => (
+                <div key={item.id} className="flex items-center justify-between p-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{item.header}</span>
+                    <Badge variant="outline" className="text-[11px] px-1.5 py-0">{item.type}</Badge>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Badge variant={item.status === "Done" ? "outline" : "secondary"} className="text-xs">
+                      {item.status}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">{item.reviewer}</span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   )

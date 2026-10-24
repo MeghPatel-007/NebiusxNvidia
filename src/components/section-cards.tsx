@@ -9,9 +9,121 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { TrendingUpIcon, TrendingDownIcon } from "lucide-react"
+import { TrendingUpIcon, TrendingDownIcon, ActivityIcon, CheckCircle2Icon, ClockIcon, GitForkIcon } from "lucide-react"
+import { MetricSummary } from "@/types/api"
 
-export function SectionCards() {
+export function SectionCards({ metrics }: { metrics?: MetricSummary }) {
+  if (metrics) {
+    return (
+      <div className="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
+        {/* Card 1: Verified Fixes */}
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription className="flex items-center gap-1.5">
+              <CheckCircle2Icon className="size-3.5 text-emerald-500" />
+              Verified Fixes
+            </CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {metrics.verifiedFixes}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                <TrendingUpIcon className="size-3 text-emerald-500" />
+                +{metrics.verifiedFixesChange}%
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Passing benchmark runs <TrendingUpIcon className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Regression tests verified
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Card 2: Test Pass Rate */}
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription className="flex items-center gap-1.5">
+              <ActivityIcon className="size-3.5 text-blue-500" />
+              Test Pass Rate
+            </CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {metrics.testPassRate}%
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline" className="border-blue-500/20 text-blue-600 dark:text-blue-400">
+                <TrendingUpIcon className="size-3 text-blue-500" />
+                Target &gt;85%
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              High patch accuracy <TrendingUpIcon className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              SWE-bench verified passes
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Card 3: Avg Repair Time */}
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription className="flex items-center gap-1.5">
+              <ClockIcon className="size-3.5 text-amber-500" />
+              Avg Repair Time
+            </CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {metrics.avgRepairTimeMinutes}m
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline" className="border-amber-500/20 text-amber-600 dark:text-amber-400">
+                <TrendingDownIcon className="size-3 text-emerald-500" />
+                -{metrics.avgRepairTimeChange}%
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Faster turnaround cycle <TrendingDownIcon className="size-4 text-emerald-500" />
+            </div>
+            <div className="text-muted-foreground">
+              Ingestion to pull request
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Card 4: Connected Repositories */}
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription className="flex items-center gap-1.5">
+              <GitForkIcon className="size-3.5 text-purple-500" />
+              Connected Repos
+            </CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {metrics.connectedRepos}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline" className="border-purple-500/20 text-purple-600 dark:text-purple-400">
+                Active Sync
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Continuous monitoring <ActivityIcon className="size-4" />
+            </div>
+            <div className="text-muted-foreground">GitHub App webhooks active</div>
+          </CardFooter>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
       <Card className="@container/card">

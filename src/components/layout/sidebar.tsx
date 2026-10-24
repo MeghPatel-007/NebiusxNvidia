@@ -36,12 +36,13 @@ export function AppSidebar() {
       await signOut({
         fetchOptions: {
           onSuccess: () => {
-            window.location.href = "/sign-in";
+            router.push("/sign-in");
+            router.refresh();
           },
         },
       });
     } catch {
-      window.location.href = "/sign-in";
+      router.push("/sign-in");
     }
   };
 
@@ -330,8 +331,16 @@ export function AppSidebar() {
 
       {/* Pinned Footer Caption */}
       {!isCollapsed && (
-        <div className="p-3 border-t border-[#EBEBEF] text-[11px] font-[400] tracking-[0.02em] text-[#9A9AA3] uppercase">
-          Repoverse® Community
+        <div className="p-3 border-t border-[#EBEBEF] text-[11px] font-[400] tracking-[0.02em] text-[#9A9AA3]">
+          {session?.user ? (
+            <div className="truncate">
+              <span className="font-[500] text-[#111111]">{session.user.name}</span>
+              <br />
+              <span className="text-[#8A8A94]">{session.user.email}</span>
+            </div>
+          ) : (
+            <span>Repoverse® Community</span>
+          )}
         </div>
       )}
     </aside>

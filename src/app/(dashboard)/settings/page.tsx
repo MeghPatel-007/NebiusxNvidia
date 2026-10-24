@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Settings, Shield, CheckCircle2, Cpu, UserCheck, KeyRound, LogOut, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { RepoBreadcrumbs } from "@/components/layout/breadcrumbs";
 import { authClient, signOut } from "@/lib/auth-client";
 
 export default function SettingsPage() {
+  const router = useRouter();
   const { data: session } = authClient.useSession();
   const [workspaceName, setWorkspaceName] = useState("Vektora Space");
   const [defaultBranch, setDefaultBranch] = useState("main");
@@ -39,12 +41,13 @@ export default function SettingsPage() {
       await signOut({
         fetchOptions: {
           onSuccess: () => {
-            window.location.href = "/sign-in";
+            router.push("/sign-in");
+            router.refresh();
           },
         },
       });
     } catch {
-      window.location.href = "/sign-in";
+      router.push("/sign-in");
     } finally {
       setRevoking(false);
     }

@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import { toast } from "sonner"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,11 +32,11 @@ export function NavDocuments({
   const { isMobile } = useSidebar()
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Documents</SidebarGroupLabel>
+      <SidebarGroupLabel>Resources</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton render={<a href={item.url} />}>
+            <SidebarMenuButton render={<Link href={item.url} />}>
               {item.icon}
               <span>{item.name}</span>
             </SidebarMenuButton>
@@ -47,39 +49,50 @@ export function NavDocuments({
                   />
                 }
               >
-                <MoreHorizontalIcon
-                />
-                <span className="sr-only">More</span>
+                <MoreHorizontalIcon />
+                <span className="sr-only">More options for {item.name}</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-24"
+                className="w-32"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
-                  <FolderIcon
-                  />
+                <DropdownMenuItem
+                  render={<Link href={item.url} className="flex items-center gap-2" />}
+                >
+                  <FolderIcon className="size-4" />
                   <span>Open</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <ShareIcon
-                  />
-                  <span>Share</span>
+                <DropdownMenuItem
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.origin + item.url)
+                    toast.success(`Copied link to ${item.name}`)
+                  }}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <ShareIcon className="size-4" />
+                  <span>Share link</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">
-                  <Trash2Icon
-                  />
-                  <span>Delete</span>
+                <DropdownMenuItem
+                  variant="destructive"
+                  onClick={() => toast.info(`${item.name} is a system resource and cannot be removed`)}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <Trash2Icon className="size-4" />
+                  <span>Remove</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
+          <SidebarMenuButton
+            className="text-sidebar-foreground/70"
+            render={<Link href="/benchmarks" />}
+          >
             <MoreHorizontalIcon className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <span>More Views</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
