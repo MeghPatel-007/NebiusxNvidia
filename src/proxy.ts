@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 
 // Protected application routes
 const protectedPrefixes = [
+  "/dashboard",
   "/overview",
   "/repositories",
   "/runs",
@@ -63,3 +64,6 @@ export const config = {
     "/reset-password",
   ],
 };
+
+export default proxy;
+

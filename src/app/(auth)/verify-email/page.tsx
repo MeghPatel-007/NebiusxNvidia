@@ -2,14 +2,13 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { AuthCard } from "@/components/auth/auth-card";
 import { AuthAlert } from "@/components/auth/auth-alert";
-import { Mail, CheckCircle2, AlertCircle, Loader2, ArrowRight } from "lucide-react";
+import { Mail, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 
 function VerifyEmailContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const emailParam = searchParams.get("email");

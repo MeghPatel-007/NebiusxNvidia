@@ -49,4 +49,15 @@ test.describe("Authentication and Access Control E2E", () => {
       page.locator("button:has-text('Resend Verification Email')")
     ).toBeVisible();
   });
+
+  test("root route renders original landing page without redirecting", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(page).toHaveURL("/");
+    await expect(
+      page.locator("text=Interactive Background Boxes Ripple Effect")
+    ).toBeVisible();
+    await expect(page.locator("text=Get to know your iSad")).toBeVisible();
+  });
 });

@@ -2,16 +2,14 @@
 
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { resetPassword } from "@/lib/auth-client";
+import { useSearchParams } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 import { AuthCard } from "@/components/auth/auth-card";
 import { PasswordInput } from "@/components/auth/password-input";
 import { AuthAlert } from "@/components/auth/auth-alert";
-import { checkPasswordStrength } from "@/lib/auth-utils";
 import { Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 
 function ResetPasswordForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const urlError = searchParams.get("error");
@@ -23,8 +21,6 @@ function ResetPasswordForm() {
     urlError ? "This password reset link is invalid or has expired." : null
   );
   const [isSuccess, setIsSuccess] = useState(false);
-
-  const strength = checkPasswordStrength(password);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,10 +48,10 @@ function ResetPasswordForm() {
 
     setLoading(true);
     try {
-      if (!resetPassword) {
+      if (!authClient.resetPassword) {
         throw new Error("Reset password function not available");
       }
-      const response = await resetPassword({
+      const response = await authClient.resetPassword({
         newPassword: password,
         token,
       });

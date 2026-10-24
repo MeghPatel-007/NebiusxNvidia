@@ -6,7 +6,6 @@ import {
 } from "@/lib/email/templates";
 import {
   sendVerificationEmail,
-  sendPasswordResetEmail,
   sendPasswordChangedNotification,
   memoryEmailAdapter,
 } from "@/lib/email";
