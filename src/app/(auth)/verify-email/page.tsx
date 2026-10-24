@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { authClient, sendVerificationEmail } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { AuthCard } from "@/components/auth/auth-card";
 import { AuthAlert } from "@/components/auth/auth-alert";
 import { Mail, CheckCircle2, AlertCircle, Loader2, ArrowRight } from "lucide-react";
@@ -86,7 +86,11 @@ function VerifyEmailContent() {
     setResendSuccess(false);
 
     try {
-      const response = await sendVerificationEmail({
+      if (!authClient.sendVerificationEmail) {
+        throw new Error("Email verification client is not available.");
+      }
+
+      const response = await authClient.sendVerificationEmail({
         email: emailInput.trim(),
         callbackURL: "/overview",
       });

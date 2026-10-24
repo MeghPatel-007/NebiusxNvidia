@@ -19,7 +19,7 @@ const authRoutes = [
   "/reset-password",
 ];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Check for Better Auth session cookie (standard or HTTPS secure prefix)
