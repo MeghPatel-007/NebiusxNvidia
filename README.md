@@ -1,28 +1,35 @@
-# NebiusxNvidia
-## Nebius × NVIDIA Global AI Hackathon
 
-**Deadline:** October 30, 2026 at 10:00 AM PDT (October 30 at 10:30 PM IST)
-**Prize information in the existing notes:** $50,000 cash.
+Welcome to the Nebius x NVIDIA Global AI Hackathon
+Build a working AI system on open, independent infrastructure, and own the whole thing. The NVIDIA x Nebius Global AI Hackathon is for AI builders, ML engineers, founders, and anyone shipping practical, high-performance AI. You'll build with NVIDIA open source models served on Nebius through Nebius Token Factory, on high performance GPU infrastructure. Experiment with new ideas, push the boundaries of open source AI, and submit a project for a chance to win prizes and recognition.
 
-### Required platform and model
+Join fellow builders for technical onboarding, casual workshops, team formation, focused build time, and feedback as you participate in the Global AI Hackathon. Find your nearby city/event here!
 
-Every submission must run on **Nebius Token Factory or Nebius AI Cloud** and use at least one **NVIDIA open-source model**. Examples in the existing notes: Nemotron, GR00T, Cosmos and Sonic.
+Requirements
+The Challenge
+All submissions must run on either Nebius Token Factory or Nebius AI Cloud and use at least one NVIDIA open source model. Everything else is up to you.
 
-### Platform, credits and tracks
+What to Build
+Whether it is an app, agent, or something entirely new, your project should fit into one of the following tracks:
 
-- Nebius AI Cloud or Token Factory; NVIDIA open-source models and GPU infrastructure.
-- Serverless Endpoints/Jobs are encouraged, not recorded as mandatory. Tavily may support web research/search. The Nebius Builders Program may provide additional credits/resources.
-- Recorded promo code: `NEBIUS-DEVPOST-GLOBAL26`.
-- Credits recorded: $25 Token Factory credits via the promo form, plus another $25 through the Builders Program; that program may also provide Tavily and Nebius Academy credits.
-- Tracks: Coding & Agentic Engineering; Best Apps & Agents; Personal AI; Physical AI.
-
-### Judging and submission checklist
-
-The four equally weighted judging areas recorded are technological implementation, design, potential impact and quality of idea.
-
-- Make Nebius and NVIDIA usage unmistakable and name the exact NVIDIA model.
-- Keep API keys out of the repository; use environment variables or `.env`.
-- Make the demo video a pitch, not a tutorial. The existing notes emphasize a three-minute video.
-- Include the required tool/model feedback.
-
-**Recorded best fit:** a React/Next.js frontend with a Node/Python backend using AI/agent infrastructure.
+Coding and Agentic Engineering Track
+Build coding agents and developer tools: agents that write, run, and test code in Token Factory.
+Best Apps and Agents Track
+Build any app or agent someone would actually use, from a productivity tool or copilot to a workflow that runs itself. Power it with Nemotron models on Nebius through Token Factory. Reach for Nemotron 3 Ultra when you need serious reasoning, and let Nano or Super handle the fast, everyday calls, so your app stays responsive and your credits stretch further. We encourage you to deploy your application with Nebius Serverless Endpoints, or use Nebius Serverless Jobs for background processing and asynchronous workflows, though neither is required.
+Personal AI Track
+Build an always-on, private assistant that works for you while keeping your data under your control. Give it persistent memory, reusable skills, access to the tools and information you choose, and the ability to carry out tasks across your daily workflows. Use at least one NVIDIA open source model, and use tools such as NVIDIA NemoClaw, OpenShell, Hermes Agent, and Nebius Serverless to bring personal AI to assemble, secure, and run your own personal AI system.
+Physical AI Track
+Build embodied and edge agents that sense and act in the real world: robotics, IoT, and on-device intelligence, powered by Nemotron, GROOT, Cosmos and Sonic models and coordinated through an agent runtime. Use Nebius Serverless Jobs to run simulations, generate synthetic data, evaluate robot policies, or process sensor data at scale, and Nebius Serverless Endpoints to serve real-time inference when needed. Your demonstration video must include at least a 1-minute clip showing the physical hardware/robot actually operating, or — if your project has no physical hardware component — the key application modules in action.
+What to Submit
+A working project. Build something with NVIDIA Nemotron or other NVIDIA open source models on either Nebius Token Factory or Nebius AI Cloud that meets the track requirements.
+A category. Pick the track that is the best fit for your project.
+A project description. Tell us what you created, why you created it, and how it works.
+A working demo. Provide a URL to a working demo, hosted application, or test build of your project.
+Not required for Physical AI submissions.
+A demo video. Upload a 3-minute or shorter public YouTube video showing your project working — how you used Nebius Token Factory and NVIDIA Nemotron or other NVIDIA open source models.
+Physical AI submissions should include at least one minute of footage showing the physical hardware/robot actually operating, or — if your project has no physical hardware component — the key application modules in action.
+A public code repository. Submit a publicly accessible code repository URL (GitHub, GitLab, or Bitbucket) for judging and testing. The repository must include an open source license (such as Apache 2.0, MIT, or MPL 2.0), visible at the top of the repository page.
+Include a README with setup instructions and clear guidance for running your project.
+Make sure to highlight how you've used NVIDIA Nemotron or other NVIDIA open source models, where Token Factory accelerated your workflow, and any other Nebius Tools or Services used.
+Feedback on Nebius Token Factory, AI Cloud, and any NVIDIA tools, models, or technologies used.
+If your project existed before the Submission Period, include a written explanation of what was significantly updated during the Submission Period.
+If you participated in one of the IRL Builders & Brews events, choose the city you attended for a chance to win the City Winner Award.  # NebiusxNvidia
