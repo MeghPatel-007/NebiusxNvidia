@@ -6,102 +6,113 @@ import {
   Clock,
   Calendar,
   Plus,
-  SlidersHorizontal,
-  Bell,
+  ArrowLeftRight,
+  Bot,
   Search,
   ChevronDown,
-  Sparkles,
 } from "lucide-react";
 import { useAppStore } from "@/lib/stores/app-store";
 
 export function AppHeader() {
-  const { currentWorkspace, searchQuery, setSearchQuery } = useAppStore();
+  const { searchQuery, setSearchQuery } = useAppStore();
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#E5E7EB] bg-white px-6">
-      {/* Left Workspace Indicator */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2.5 rounded-full bg-black px-3 py-1.5 text-white">
-          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#10B981] text-[11px] font-bold text-black">
-            R
+    <div className="flex flex-col w-full bg-white select-none">
+      {/* Row 1: Page Header (Height: 50px, border-b hairline #EBEBEF) */}
+      <div className="flex h-[50px] items-center justify-between px-4 border-b border-[#EBEBEF]">
+        {/* Left: 28px dark-green logo + Vektora + Code Space chip */}
+        <div className="flex items-center gap-3">
+          <div className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#0E2A1F] text-[13px] font-bold text-[#1FBF5B]">
+            V
           </div>
-          <span className="text-[13px] font-medium">{currentWorkspace}</span>
+          <span className="text-[22px] font-[500] tracking-[-0.01em] text-[#111111]">
+            Vektora
+          </span>
+          <div className="flex items-center h-[32px] px-3 rounded-[8px] bg-[#F4F4F6] text-[15px] font-[400] text-[#111111]">
+            Code Space
+          </div>
+        </div>
+
+        {/* Right: Overlapping 4-avatar stack + Invite people button */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center -space-x-1.5">
+            <div className="flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-white bg-[#334155] text-[8px] font-semibold text-white">
+              JD
+            </div>
+            <div className="flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-white bg-[#0E2A1F] text-[8px] font-semibold text-[#1FBF5B]">
+              IH
+            </div>
+            <div className="flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-white bg-[#4338CA] text-[8px] font-semibold text-white">
+              BG
+            </div>
+            <div className="flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 border-white bg-[#B45309] text-[8px] font-semibold text-white">
+              DV
+            </div>
+          </div>
+
+          <Link
+            href="/runs/new"
+            className="flex items-center justify-center h-[34px] px-3.5 rounded-[10px] border border-[#EBEBEF] bg-white text-[15px] font-[400] text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+          >
+            Invite people
+          </Link>
         </div>
       </div>
 
-      {/* Middle & Right Actions Toolbar */}
-      <div className="flex items-center gap-3">
-        {/* Recents Work button */}
-        <button className="hidden md:flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-1.5 text-[13px] font-medium text-[#374151] hover:bg-[#F9FAFB] transition-colors shadow-2xs">
-          <Clock className="h-3.5 w-3.5 text-[#6B7280]" />
-          <span>Recents Work</span>
-        </button>
+      {/* Row 2: Toolbar (Height: ~51px, border-b hairline #EBEBEF) */}
+      <div className="flex h-[51px] items-center justify-between px-4 border-b border-[#EBEBEF]">
+        {/* Left cluster: Recents Work + Date Selector */}
+        <div className="flex items-center gap-2">
+          <button className="flex items-center gap-1.5 h-[28px] px-2.5 rounded-[8px] border border-[#EBEBEF] bg-white text-[14.5px] font-[400] text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]">
+            <Clock className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+            <span>Recents Work</span>
+          </button>
 
-        {/* Date Dropdown */}
-        <button className="hidden lg:flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-1.5 text-[13px] font-medium text-[#374151] hover:bg-[#F9FAFB] transition-colors shadow-2xs">
-          <Calendar className="h-3.5 w-3.5 text-[#6B7280]" />
-          <span>October 2026</span>
-          <ChevronDown className="h-3 w-3 text-[#9CA3AF]" />
-        </button>
-
-        {/* Quick icon actions: + and Filter */}
-        <Link
-          href="/runs/new"
-          title="New Debug Session"
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors shadow-2xs"
-        >
-          <Plus className="h-4 w-4" />
-        </Link>
-
-        <button
-          title="Filter Preferences"
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors shadow-2xs"
-        >
-          <SlidersHorizontal className="h-4 w-4" />
-        </button>
-
-        <button
-          title="Notifications"
-          className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors shadow-2xs"
-        >
-          <Bell className="h-4 w-4" />
-          <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-        </button>
-
-        {/* Search Input */}
-        <div className="relative hidden sm:block w-48 md:w-64">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#9CA3AF]" />
-          <input
-            type="text"
-            placeholder="Type / to search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-8 w-full rounded-lg border border-[#E5E7EB] bg-[#FAFAFA] pl-8 pr-3 text-[12px] text-[#111827] placeholder-[#9CA3AF] focus:border-[#10B981] focus:bg-white focus:outline-none transition-colors"
-          />
+          <button className="flex items-center gap-1.5 h-[28px] px-2.5 rounded-[8px] border border-[#EBEBEF] bg-white text-[14.5px] font-[400] text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]">
+            <Calendar className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+            <span>January 2026</span>
+            <ChevronDown className="h-3.5 w-3.5 text-[#8A8A94]" strokeWidth={1.5} />
+          </button>
         </div>
 
-        {/* User Avatars Stack */}
-        <div className="hidden xl:flex items-center -space-x-1.5">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-slate-700 text-[10px] font-semibold text-white">
-            JD
-          </div>
-          <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-emerald-700 text-[10px] font-semibold text-white">
-            IH
-          </div>
-          <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-indigo-700 text-[10px] font-semibold text-white">
-            BG
+        {/* Right cluster: 3 icon buttons + Search input */}
+        <div className="flex items-center gap-2">
+          <Link
+            href="/runs/new"
+            title="Add debug session"
+            className="flex h-[28px] w-[28px] items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+          >
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
+          </Link>
+
+          <button
+            title="Sync repository"
+            className="flex h-[28px] w-[28px] items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+          >
+            <ArrowLeftRight className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+          </button>
+
+          <Link
+            href="/models"
+            title="AI Agent / Bot"
+            className="flex h-[28px] w-[28px] items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+          >
+            <Bot className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+          </Link>
+
+          {/* Search input with / shortcut */}
+          <div className="relative w-[190px] md:w-[210px]">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#8A8A94]" strokeWidth={1.5} />
+            <input
+              type="text"
+              placeholder="Type / to search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-[28px] w-full rounded-[8px] border border-[#EBEBEF] bg-white pl-8 pr-2.5 text-[13px] text-[#111111] placeholder-[#8A8A94] focus:border-[#22A646] focus:outline-none transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+            />
           </div>
         </div>
-
-        {/* Primary Action Button */}
-        <Link
-          href="/runs/new"
-          className="flex items-center gap-1.5 rounded-lg bg-[#10B981] px-3.5 py-1.5 text-[13px] font-semibold text-white hover:bg-[#059669] transition-colors shadow-xs"
-        >
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>New Debug Session</span>
-        </Link>
       </div>
-    </header>
+    </div>
   );
 }

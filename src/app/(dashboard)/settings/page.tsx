@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { RepoBreadcrumbs } from "@/components/layout/breadcrumbs";
 
 export default function SettingsPage() {
-  const [workspaceName, setWorkspaceName] = useState("RepoPilot Workspace");
+  const [workspaceName, setWorkspaceName] = useState("Vektora Space");
   const [defaultBranch, setDefaultBranch] = useState("main");
   const [defaultModel, setDefaultModel] = useState("nvidia/nemotron-4-340b-instruct");
   const [testTimeout, setTestTimeout] = useState(120);
@@ -18,66 +18,68 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 bg-white">
       <RepoBreadcrumbs
-        workspace="RepoPilot Space"
+        workspace="Vektora Space"
         repositoryName="Settings"
         isPrivate={false}
       />
 
       <div className="p-6 space-y-6 max-w-4xl">
         <div>
-          <h1 className="text-xl font-bold text-[#111827]">Workspace & Agent Settings</h1>
-          <p className="text-sm text-[#6B7280]">
+          <h1 className="text-[22px] font-[500] tracking-[-0.01em] text-[#111111]">
+            Workspace & Agent Settings
+          </h1>
+          <p className="text-[14.5px] font-[400] text-[#8A8A94]">
             Configure autonomous agent execution boundaries, Nebius endpoints, and workspace preferences.
           </p>
         </div>
 
         <form onSubmit={handleSave} className="space-y-6">
           {/* General Workspace Card */}
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
-            <div className="flex items-center gap-2 border-b border-[#F3F4F6] pb-3">
-              <Settings className="h-4 w-4 text-[#10B981]" />
-              <h2 className="text-sm font-semibold text-[#111827]">General Configuration</h2>
+          <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
+            <div className="flex items-center gap-2 border-b border-[#EBEBEF] pb-3">
+              <Settings className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+              <h2 className="text-[16px] font-[500] text-[#111111]">General Configuration</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#374151]">Workspace Name</label>
+                <label className="text-[13px] font-[500] text-[#3A3A42]">Workspace Name</label>
                 <input
                   type="text"
                   value={workspaceName}
                   onChange={(e) => setWorkspaceName(e.target.value)}
-                  className="w-full h-10 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#111827] focus:border-[#10B981] focus:outline-none"
+                  className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#374151]">Default Git Branch</label>
+                <label className="text-[13px] font-[500] text-[#3A3A42]">Default Git Branch</label>
                 <input
                   type="text"
                   value={defaultBranch}
                   onChange={(e) => setDefaultBranch(e.target.value)}
-                  className="w-full h-10 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#111827] focus:border-[#10B981] focus:outline-none"
+                  className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
                 />
               </div>
             </div>
           </div>
 
           {/* Agent & Inference Card */}
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
-            <div className="flex items-center gap-2 border-b border-[#F3F4F6] pb-3">
-              <Cpu className="h-4 w-4 text-[#10B981]" />
-              <h2 className="text-sm font-semibold text-[#111827]">Autonomous Agent Settings</h2>
+          <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
+            <div className="flex items-center gap-2 border-b border-[#EBEBEF] pb-3">
+              <Cpu className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+              <h2 className="text-[16px] font-[500] text-[#111111]">Autonomous Agent Settings</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#374151]">Default Inference Model</label>
+                <label className="text-[13px] font-[500] text-[#3A3A42]">Default Inference Model</label>
                 <select
                   value={defaultModel}
                   onChange={(e) => setDefaultModel(e.target.value)}
-                  className="w-full h-10 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#111827] focus:border-[#10B981] focus:outline-none"
+                  className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
                 >
                   <option value="nvidia/nemotron-4-340b-instruct">
                     nvidia/nemotron-4-340b-instruct
@@ -89,12 +91,12 @@ export default function SettingsPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#374151]">Test Timeout (seconds)</label>
+                <label className="text-[13px] font-[500] text-[#3A3A42]">Test Timeout (seconds)</label>
                 <input
                   type="number"
                   value={testTimeout}
                   onChange={(e) => setTestTimeout(Number(e.target.value))}
-                  className="w-full h-10 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#111827] focus:border-[#10B981] focus:outline-none"
+                  className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
                 />
               </div>
             </div>
@@ -105,28 +107,28 @@ export default function SettingsPage() {
                 id="requireApproval"
                 checked={requireApproval}
                 onChange={(e) => setRequireApproval(e.target.checked)}
-                className="h-4 w-4 rounded border-gray-300 text-[#10B981] focus:ring-[#10B981]"
+                className="h-4 w-4 rounded border-[#EBEBEF] text-[#22A646] focus:ring-[#22A646]"
               />
-              <label htmlFor="requireApproval" className="text-xs font-medium text-[#374151]">
+              <label htmlFor="requireApproval" className="text-[13.5px] font-[400] text-[#3A3A42]">
                 Require human review and explicit approval before committing patches to remote branch
               </label>
             </div>
           </div>
 
           {/* Security & Sandbox Guardrails */}
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
-            <div className="flex items-center gap-2 border-b border-[#F3F4F6] pb-3">
-              <Shield className="h-4 w-4 text-[#10B981]" />
-              <h2 className="text-sm font-semibold text-[#111827]">Security & Sandbox Guardrails</h2>
+          <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
+            <div className="flex items-center gap-2 border-b border-[#EBEBEF] pb-3">
+              <Shield className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+              <h2 className="text-[16px] font-[500] text-[#111111]">Security & Sandbox Guardrails</h2>
             </div>
 
-            <div className="space-y-2 text-xs text-[#4B5563]">
-              <div className="flex items-center gap-2 text-[#059669]">
-                <CheckCircle2 className="h-4 w-4" />
+            <div className="space-y-2 text-[13.5px] text-[#3A3A42]">
+              <div className="flex items-center gap-2 text-[#22A646]">
+                <CheckCircle2 className="h-4 w-4" strokeWidth={1.5} />
                 <span>Isolated container execution prevents untrusted repository code execution in Next.js</span>
               </div>
-              <div className="flex items-center gap-2 text-[#059669]">
-                <CheckCircle2 className="h-4 w-4" />
+              <div className="flex items-center gap-2 text-[#22A646]">
+                <CheckCircle2 className="h-4 w-4" strokeWidth={1.5} />
                 <span>Serverless Nebius Token Factory secrets kept strictly server-side</span>
               </div>
             </div>
@@ -135,7 +137,7 @@ export default function SettingsPage() {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="rounded-lg bg-[#10B981] px-5 py-2 text-sm font-semibold text-white hover:bg-[#059669] transition-colors shadow-xs"
+              className="flex items-center justify-center h-[34px] px-4 rounded-[10px] bg-[#22A646] text-[14px] font-[500] text-white hover:bg-[#1f963f] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
             >
               Save Changes
             </button>

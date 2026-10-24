@@ -3,83 +3,76 @@
 import React from "react";
 import { MoreHorizontal } from "lucide-react";
 import { MetricSummary } from "@/types/api";
-import { cn } from "@/lib/utils";
 
 interface KpiCardsProps {
   metrics?: MetricSummary;
 }
 
-export function KpiCards({ metrics }: KpiCardsProps) {
+export function KpiCards({ metrics: _metrics }: KpiCardsProps) {
   const cards = [
     {
       title: "Contribute Rate",
-      subtitle: "Member Average",
-      value: metrics ? `${metrics.verifiedFixes}` : "65,4",
+      caption: "Member Average",
+      value: "65,4",
       change: "+21.8%",
-      isPositive: true,
-      isNeutral: false,
+      pillClass: "bg-[#E6F8EA] text-[#22A646]",
     },
     {
       title: "Commit Rate",
-      subtitle: "Member Average",
-      value: metrics ? `${metrics.testPassRate}` : "32,6",
+      caption: "Member Average",
+      value: "32,6",
       change: "0.0%",
-      isPositive: false,
-      isNeutral: true,
+      pillClass: "bg-[#F6F6F8] text-[#111111] border border-[#EBEBEF]",
     },
     {
       title: "Hours Rate",
-      subtitle: "Member Average",
-      value: metrics ? `${metrics.avgRepairTimeMinutes}` : "35,6",
+      caption: "Member Average",
+      value: "35,6",
       change: "+12.0%",
-      isPositive: true,
-      isNeutral: false,
+      pillClass: "bg-[#E6F8EA] text-[#22A646]",
     },
     {
       title: "Work Rate",
-      subtitle: "Member Average",
-      value: metrics ? `${metrics.connectedReposChange < 0 ? "31,1%" : "31.1%"}` : "31,1%",
+      caption: "Member Average",
+      value: "31,1%",
       change: "-9.0%",
-      isPositive: false,
-      isNeutral: false,
+      pillClass: "bg-[#FFE8EA] text-[#E5484D]",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-[#EBEBEF] bg-white py-3">
       {cards.map((card, idx) => (
         <div
           key={idx}
-          className="rounded-2xl border border-[#E5E7EB] bg-white p-5 flex flex-col justify-between hover:border-[#D1D5DB] transition-all shadow-2xs"
+          className="flex flex-col justify-between px-4 py-2 min-h-[97px]"
         >
-          {/* Top title & three dots */}
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[13px] font-medium text-[#111827]">{card.title}</span>
+          {/* Row 1: Title + Three dots */}
+          <div className="flex items-center justify-between">
+            <span className="text-[16.5px] font-[450] text-[#3A3A42]">
+              {card.title}
+            </span>
             <button
               aria-label="Options"
-              className="text-[#9CA3AF] hover:text-[#4B5563] p-1 rounded-md hover:bg-[#F3F4F6] transition-colors"
+              className="text-[#8A8A94] hover:text-[#111111] p-0.5 rounded transition-colors"
             >
-              <MoreHorizontal className="h-4 w-4" />
+              <MoreHorizontal className="h-5 w-5" strokeWidth={1.5} />
             </button>
           </div>
 
-          <div className="text-[12px] text-[#9CA3AF] mb-3">{card.subtitle}</div>
+          {/* Row 2: Caption */}
+          <div className="text-[14.5px] font-[400] text-[#8A8A94]">
+            {card.caption}
+          </div>
 
-          {/* Big number and delta pill */}
-          <div className="flex items-baseline justify-between mt-auto">
-            <span className="text-[28px] font-semibold text-[#111827] tracking-tight">
+          {/* Row 3: Big Value + Delta Pill on shared baseline */}
+          <div className="flex items-baseline justify-between mt-2">
+            <span className="text-[32px] font-[500] leading-none tracking-[-0.01em] text-[#111111]">
               {card.value}
             </span>
 
             <span
-              className={cn(
-                "rounded-md px-2 py-0.5 text-[12px] font-semibold",
-                card.isNeutral
-                  ? "bg-[#F3F4F6] text-[#6B7280]"
-                  : card.isPositive
-                  ? "bg-[#E6F9F0] text-[#10B981]"
-                  : "bg-[#FEE2E2] text-[#EF4444]"
-              )}
+              className={`inline-flex items-center justify-center h-[24px] px-2 rounded-[6px] text-[14px] font-[400] leading-none ${card.pillClass}`}
             >
               {card.change}
             </span>

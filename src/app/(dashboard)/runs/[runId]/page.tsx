@@ -28,9 +28,9 @@ export default async function RunDetailPage({
   }
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 bg-white">
       <RepoBreadcrumbs
-        workspace="RepoPilot Space"
+        workspace="Vektora Space"
         repositoryName={run.repoName || "prime-marketplace-3.0"}
         isPrivate={true}
         tagsCount={2}
@@ -43,28 +43,28 @@ export default async function RunDetailPage({
           <div className="flex items-center gap-3">
             <Link
               href="/runs"
-              className="p-1.5 rounded-lg border border-[#E5E7EB] bg-white text-[#6B7280] hover:text-[#111827] transition-colors shadow-2xs"
+              className="flex h-[32px] w-[32px] items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[#8A8A94] hover:text-[#111111] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
             </Link>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-[#111827]">{run.title}</h1>
+                <h1 className="text-[22px] font-[500] tracking-[-0.01em] text-[#111111]">{run.title}</h1>
                 <span
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                  className={`inline-flex items-center gap-1 h-[22px] px-2 rounded-[6px] text-[12px] font-[500] ${
                     run.status === "passed"
-                      ? "bg-[#E6F9F0] text-[#059669]"
+                      ? "bg-[#E6F8EA] text-[#22A646]"
                       : run.status === "running"
-                      ? "bg-blue-50 text-blue-700 animate-pulse"
-                      : "bg-red-50 text-red-700"
+                      ? "bg-[#EFF6FF] text-[#2563EB]"
+                      : "bg-[#FFE8EA] text-[#E5484D]"
                   }`}
                 >
-                  <CheckCircle2 className="h-3 w-3" />
+                  <CheckCircle2 className="h-3 w-3" strokeWidth={1.5} />
                   {run.status.toUpperCase()}
                 </span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#6B7280] mt-1">
-                <span>Session ID: <code className="font-mono">{run.id}</code></span>
+              <div className="flex items-center gap-3 text-[13px] text-[#8A8A94] mt-1">
+                <span>Session ID: <code className="font-mono text-[#111111]">{run.id}</code></span>
                 <span>•</span>
                 <span>Repository: {run.repoFullName || run.repoName}</span>
                 <span>•</span>
@@ -73,7 +73,7 @@ export default async function RunDetailPage({
                   <>
                     <span>•</span>
                     <span className="flex items-center gap-1">
-                      <GitCommit className="h-3 w-3" />
+                      <GitCommit className="h-3 w-3 text-[#8A8A94]" strokeWidth={1.5} />
                       {run.commitSha}
                     </span>
                   </>
@@ -83,29 +83,29 @@ export default async function RunDetailPage({
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-xs font-medium text-[#059669] bg-[#E6F9F0] px-3 py-1.5 rounded-lg border border-[#C7E8CE]">
-              <Cpu className="h-3.5 w-3.5" />
+            <span className="flex items-center gap-1.5 text-[13px] font-[500] text-[#22A646] bg-[#E6F8EA] px-3 py-1.5 rounded-[8px] border border-[#A3E9B5]">
+              <Cpu className="h-3.5 w-3.5" strokeWidth={1.5} />
               {run.modelUsed}
             </span>
           </div>
         </div>
 
         {/* Overview & Issue Card */}
-        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
-          <h2 className="text-sm font-semibold text-[#111827] uppercase tracking-wider">
+        <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-3">
+          <h2 className="text-[13px] font-[500] text-[#111111] uppercase tracking-[0.02em]">
             Issue Description & Context
           </h2>
-          <p className="text-sm text-[#374151] leading-relaxed bg-[#F9FAFB] p-4 rounded-xl border border-[#F3F4F6]">
+          <p className="text-[14.5px] text-[#3A3A42] leading-relaxed bg-[#FDFDFD] p-4 rounded-[8px] border border-[#EBEBEF]">
             {run.issueDescription}
           </p>
         </div>
 
         {/* Findings with File & Line Reference */}
         {run.findings && run.findings.length > 0 && (
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
+          <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-amber-500" />
-              <h2 className="text-sm font-semibold text-[#111827] uppercase tracking-wider">
+              <AlertTriangle className="h-4 w-4 text-[#D97706]" strokeWidth={1.5} />
+              <h2 className="text-[13px] font-[500] text-[#111111] uppercase tracking-[0.02em]">
                 Diagnostic Findings ({run.findings.length})
               </h2>
             </div>
@@ -113,16 +113,16 @@ export default async function RunDetailPage({
               {run.findings.map((finding) => (
                 <div
                   key={finding.id}
-                  className="flex items-start gap-3 p-4 rounded-xl border border-amber-200 bg-amber-50/50"
+                  className="flex items-start gap-3 p-4 rounded-[8px] border border-[#FED7AA] bg-[#FFFBEB]"
                 >
-                  <div className="flex-1 text-xs text-[#374151]">
-                    <div className="flex items-center gap-2 font-mono font-semibold text-[#111827] mb-1">
-                      <FileCode className="h-3.5 w-3.5 text-amber-600" />
+                  <div className="flex-1 text-[13.5px] text-[#3A3A42]">
+                    <div className="flex items-center gap-2 font-mono font-[500] text-[#111111] mb-1">
+                      <FileCode className="h-3.5 w-3.5 text-[#D97706]" strokeWidth={1.5} />
                       <span>{finding.file}:{finding.line}</span>
                     </div>
                     <p>{finding.message}</p>
                   </div>
-                  <span className="rounded-md bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-800 uppercase">
+                  <span className="rounded-[6px] bg-[#FEF3C7] px-2 py-0.5 text-[11px] font-[500] text-[#92400E] uppercase">
                     {finding.severity}
                   </span>
                 </div>
@@ -133,23 +133,23 @@ export default async function RunDetailPage({
 
         {/* Patch Diff View */}
         {run.patchDiff && (
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
+          <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileCode className="h-4 w-4 text-[#10B981]" />
-                <h2 className="text-sm font-semibold text-[#111827] uppercase tracking-wider">
+                <FileCode className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+                <h2 className="text-[13px] font-[500] text-[#111111] uppercase tracking-[0.02em]">
                   Generated Patch Diff
                 </h2>
               </div>
-              <span className="text-xs text-[#6B7280]">Unified diff format</span>
+              <span className="text-[13px] text-[#8A8A94]">Unified diff format</span>
             </div>
 
-            <pre className="overflow-x-auto rounded-xl bg-[#1E293B] p-4 text-xs font-mono text-[#E2E8F0] leading-relaxed">
+            <pre className="overflow-x-auto rounded-[8px] bg-[#1E293B] p-4 text-[13px] font-mono text-[#E2E8F0] leading-relaxed">
               {run.patchDiff.split("\n").map((line, idx) => {
                 let color = "text-[#E2E8F0]";
-                if (line.startsWith("+")) color = "text-emerald-400 bg-emerald-950/40";
-                if (line.startsWith("-")) color = "text-rose-400 bg-rose-950/40";
-                if (line.startsWith("@")) color = "text-cyan-400";
+                if (line.startsWith("+")) color = "text-[#4ADE80] bg-emerald-950/40";
+                if (line.startsWith("-")) color = "text-[#F87171] bg-rose-950/40";
+                if (line.startsWith("@")) color = "text-[#38BDF8]";
                 return (
                   <div key={idx} className={color}>
                     {line}
@@ -161,19 +161,19 @@ export default async function RunDetailPage({
         )}
 
         {/* Verification Test Execution Results */}
-        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-2xs space-y-4">
+        <div className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Terminal className="h-4 w-4 text-[#10B981]" />
-              <h2 className="text-sm font-semibold text-[#111827] uppercase tracking-wider">
+              <Terminal className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+              <h2 className="text-[13px] font-[500] text-[#111111] uppercase tracking-[0.02em]">
                 Automated Test Verification
               </h2>
             </div>
             <span
-              className={`rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+              className={`rounded-[6px] px-2.5 py-0.5 text-[12px] font-[500] ${
                 run.testExitCode === 0
-                  ? "bg-[#E6F9F0] text-[#059669]"
-                  : "bg-red-50 text-red-700"
+                  ? "bg-[#E6F8EA] text-[#22A646]"
+                  : "bg-[#FFE8EA] text-[#E5484D]"
               }`}
             >
               Exit code: {run.testExitCode ?? 0}
@@ -181,19 +181,19 @@ export default async function RunDetailPage({
           </div>
 
           {run.testCommand && (
-            <div className="text-xs text-[#4B5563]">
-              Executed command: <code className="font-mono bg-[#F3F4F6] px-2 py-1 rounded-md text-[#111827]">{run.testCommand}</code>
+            <div className="text-[13.5px] text-[#3A3A42]">
+              Executed command: <code className="font-mono bg-[#F6F6F8] border border-[#EBEBEF] px-2 py-0.5 rounded-[6px] text-[#111111]">{run.testCommand}</code>
             </div>
           )}
 
           {run.testStdout && (
-            <pre className="overflow-x-auto rounded-xl bg-[#0F172A] p-4 text-xs font-mono text-emerald-400 leading-relaxed whitespace-pre-wrap">
+            <pre className="overflow-x-auto rounded-[8px] bg-[#0F172A] p-4 text-[13px] font-mono text-[#4ADE80] leading-relaxed whitespace-pre-wrap">
               {run.testStdout}
             </pre>
           )}
 
           {run.testStderr && (
-            <pre className="overflow-x-auto rounded-xl bg-[#0F172A] p-4 text-xs font-mono text-rose-400 leading-relaxed whitespace-pre-wrap">
+            <pre className="overflow-x-auto rounded-[8px] bg-[#0F172A] p-4 text-[13px] font-mono text-[#F87171] leading-relaxed whitespace-pre-wrap">
               {run.testStderr}
             </pre>
           )}

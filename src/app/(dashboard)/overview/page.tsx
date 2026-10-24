@@ -18,31 +18,31 @@ export default async function OverviewPage() {
   const heatmapDays = generateActivityHeatmap();
 
   return (
-    <div className="flex flex-col flex-1">
-      {/* Subheader / Breadcrumbs bar */}
+    <div className="flex flex-col flex-1 bg-white">
+      {/* Breadcrumb strip (Height: ~57px, hairline below) */}
       <RepoBreadcrumbs
-        workspace="RepoPilot Space"
+        workspace="Vektora Space"
         repositoryName="prime-marketplace-3.0"
         isPrivate={true}
         tagsCount={7}
         branchesCount={10}
       />
 
-      {/* Main Workspace Grid with Right Contextual Panel */}
+      {/* Main Grid with Right Rail */}
       <div className="flex flex-col xl:flex-row flex-1">
-        {/* Central Content Area */}
-        <div className="flex-1 p-6 space-y-6 min-w-0">
-          {/* 4 KPI Cards */}
+        {/* Central Content Column */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* KPI Row (Height: ~97px, 4 equal columns, hairline below) */}
           <KpiCards metrics={metrics} />
 
-          {/* Activity Heatmap */}
+          {/* Project Contributors Section (Heatmap: 6 rows × 29 columns, hairline below) */}
           <ActivityHeatmap days={heatmapDays} />
 
-          {/* Member Status / Agent Runs Table */}
+          {/* Member Status Table (Row h 40px, status dots, 1px bottom borders) */}
           <MemberStatusTable runs={runs} />
         </div>
 
-        {/* Right-side Contextual Activity & Active Repositories Panel */}
+        {/* Right Activity Rail (Width: ~296px, hairline left) */}
         <ActivityPanel />
       </div>
     </div>
