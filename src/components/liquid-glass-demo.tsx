@@ -1,55 +1,58 @@
-"use client";
+'use client'
 
-import { useRef } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import { LiquidGlass } from "@/components/ui/liquid-glass";
-import Image from 'next/image';
-
+import { useRef } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
+import { LiquidGlass } from '@/components/ui/liquid-glass'
+// import Video from 'next-video';
+// import myAwesomeVideo from '@/videos/hero-video.mp4';
 
 type LiquidGlassDemoProps = {
-  shape?: "circle" | "pill";
-  scale?: number;
-  aberration?: number;
-  bevelDepth?: number;
-  frost?: number;
-  tint?: number;
-};
+  shape?: 'circle' | 'pill'
+  scale?: number
+  aberration?: number
+  bevelDepth?: number
+  frost?: number
+  tint?: number
+}
 
 export default function LiquidGlassDemo({
-  shape = "circle",
+  shape = 'circle',
   scale = 48,
   aberration = 14,
   bevelDepth = 37,
   frost = 0.4,
   tint = 0.12,
 }: LiquidGlassDemoProps) {
-  const constraintsRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const size = shape === "pill" ? { w: 320, h: 120 } : { w: 200, h: 200 };
+  const constraintsRef = useRef<HTMLDivElement>(null)
+  const reduceMotion = useReducedMotion()
+  const size = shape === 'pill' ? { w: 320, h: 120 } : { w: 200, h: 200 }
 
   return (
     <div
       ref={constraintsRef}
-      className="relative h-[20rem] w-full overflow-hidden bg-neutral-900"
+      className="relative min-h-screen w-full overflow-hidden bg-neutral-900"
     >
-      <img
-        src="/images/hero-image.jpg"
-        alt=""
-        className="absolute inset-0 size-full object-fit"
+      <video
+        src="assets/hero-video.mp4"
+        className="absolute inset-0 size-full object-cover"
         draggable={true}
+        autoPlay
+        muted
+        loop
+        playsInline
       />
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center p-8 text-center select-none">
         <p className="text-6xl leading-[0.95] font-bold tracking-tighter text-white md:text-8xl">
-          {["Repo", "Pilot"].map((word, index) => (
+          {['Repo', 'Pilot'].map((word, index) => (
             <motion.span
               key={word}
               className="inline-block"
               initial={
                 reduceMotion
                   ? false
-                  : { opacity: 0, y: 28, filter: "blur(10px)" }
+                  : { opacity: 0, y: 28, filter: 'blur(10px)' }
               }
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{
                 duration: 0.8,
                 delay: 0.15 + index * 0.12,
@@ -57,7 +60,7 @@ export default function LiquidGlassDemo({
               }}
             >
               {word}
-              {index === 0 && "\u00A0"}
+              {index === 0 && '\u00A0'}
             </motion.span>
           ))}
         </p>
@@ -87,5 +90,5 @@ export default function LiquidGlassDemo({
         />
       </motion.div>
     </div>
-  );
+  )
 }

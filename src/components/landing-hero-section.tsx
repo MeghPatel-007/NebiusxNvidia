@@ -8,11 +8,11 @@ import LiquidGlassDemo from '@/components/liquid-glass-demo'
 export default function LandingHeroSection() {
   return (
     <>
-      <div className="relative flex h-[15rem] w-full items-center justify-center overflow-hidden">
+      {/* <div className="relative flex h-[15rem] w-full items-center justify-center overflow-hidden">
         <BackgroundRippleEffect inverted className="z-0" />
-      </div>
+      </div> */}
       <LiquidGlassDemo/>
-      <BackgroundRippleEffectDemo />
+      {/* <BackgroundRippleEffectDemo /> */}
     </>
   )
 }

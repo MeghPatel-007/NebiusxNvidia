@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Bug, GitBranch, Share2, ShieldCheck } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -63,7 +64,10 @@ export function AboutUsSection11({ className }: { className?: string }) {
                 building with confidence.
               </p>
             </div>
-            <Button className="h-10 rounded-full px-5 text-sm font-medium">
+            <Button
+              render={<Link href="#features" />}
+              className="h-10 rounded-full px-5 text-sm font-medium"
+            >
               Explore RepoPilot
             </Button>
           </div>

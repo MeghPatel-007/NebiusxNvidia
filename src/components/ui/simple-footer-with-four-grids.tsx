@@ -53,8 +53,8 @@ export const defaultFooterColumns: FooterColumn[] = [
   {
     title: "Register",
     links: [
-      { title: "Sign Up", href: "#" },
-      { title: "Login", href: "#" },
+      { title: "Sign Up", href: "/sign-up" },
+      { title: "Login", href: "/sign-in" },
       { title: "Forgot Password", href: "#" },
     ],
   },

@@ -24,6 +24,16 @@ const CARD_TITLES = [
   "Investigation History",
 ];
 
+const CARD_PALETTE = [
+  { background: "bg-[#0B2A12]", colors: [[16, 185, 129]] },
+  { background: "bg-[#0B1E2A]", colors: [[56, 189, 248]] },
+  { background: "bg-[#1A0B2A]", colors: [[167, 139, 250]] },
+  { background: "bg-[#2A1B0B]", colors: [[251, 191, 36]] },
+  { background: "bg-[#2A0B14]", colors: [[244, 114, 182]] },
+  { background: "bg-[#0B2A26]", colors: [[45, 212, 191]] },
+  { background: "bg-[#0E0B2A]", colors: [[99, 102, 241]] },
+];
+
 interface CanvasRevealEffectDemoProps {
   count?: number;
   rows?: number;
@@ -79,19 +89,23 @@ export default function CanvasRevealEffectDemo({
             key={colIdx}
             className="flex-1 flex flex-col gap-4 min-w-0 max-w-full"
           >
-            {colCards.map((card) => (
-              <Card
-                key={card.index}
-                title={CARD_TITLES[card.index % CARD_TITLES.length]}
-                icon={<AceternityIcon />}
-                className={cn("w-full", card.heightClass)}
-              >
-                <CanvasRevealEffect
-                  animationSpeed={5.1}
-                  containerClassName="bg-[#0B2A12]"
-                />
-              </Card>
-            ))}
+            {colCards.map((card) => {
+              const palette = CARD_PALETTE[card.index % CARD_PALETTE.length];
+              return (
+                <Card
+                  key={card.index}
+                  title={CARD_TITLES[card.index % CARD_TITLES.length]}
+                  icon={<AceternityIcon />}
+                  className={cn("w-full", card.heightClass)}
+                >
+                  <CanvasRevealEffect
+                    animationSpeed={5.1}
+                    colors={palette.colors}
+                    containerClassName={palette.background}
+                  />
+                </Card>
+              );
+            })}
           </div>
         ))}
       </div>
