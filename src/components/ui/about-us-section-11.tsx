@@ -43,7 +43,7 @@ const features = [
 export function AboutUsSection11({ className }: { className?: string }) {
   return (
     <section className={className}>
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-16 lg:py-20">
+      <div className="container-page py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
           <div className="flex flex-col items-start gap-10 py-2">
             <div className="flex flex-col items-start gap-6">

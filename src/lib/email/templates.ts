@@ -4,7 +4,7 @@ interface TemplateParams {
   appName?: string;
 }
 
-const BRAND_NAME = "Repoverse";
+const BRAND_NAME = "RepoPilot";
 const BRAND_GREEN = "#1FBF5B";
 
 function baseEmailTemplate({
@@ -113,7 +113,7 @@ function baseEmailTemplate({
 export function renderVerificationEmail({ name, url }: TemplateParams) {
   const greeting = name ? `Hello ${name},` : "Hello,";
   const intro = `${greeting} thank you for creating your ${BRAND_NAME} account. Please verify your email address to activate your access.`;
-  const secondaryNote = "This verification link is single-use and will expire shortly. If you did not create a Repoverse account, you can safely ignore this email.";
+  const secondaryNote = "This verification link is single-use and will expire shortly. If you did not create a RepoPilot account, you can safely ignore this email.";
 
   const html = baseEmailTemplate({
     headline: "Verify your email address",

@@ -62,13 +62,13 @@ function SignInForm() {
   return (
     <AuthCard
       title="Welcome back"
-      subtitle="Sign in to your Repoverse engineering dashboard"
+      subtitle="Sign in to your RepoPilot engineering dashboard"
       footer={
         <p>
           Don&apos;t have an account?{" "}
           <Link
             href={`/sign-up${rawRedirect ? `?redirect=${encodeURIComponent(rawRedirect)}` : ""}`}
-            className="font-[500] text-[#1FBF5B] hover:underline"
+            className="font-[500] text-(--brand) hover:underline"
           >
             Create an account
           </Link>
@@ -81,7 +81,7 @@ function SignInForm() {
         <div className="space-y-1.5">
           <label
             htmlFor="email"
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             Email address
           </label>
@@ -93,7 +93,7 @@ function SignInForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@domain.com"
-            className="flex h-[38px] w-full rounded-[8px] border border-[#EBEBEF] bg-white px-3 py-1.5 text-[14px] text-[#111111] placeholder:text-[#8A8A94] shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#1FBF5B] focus:outline-none focus:ring-1 focus:ring-[#1FBF5B]"
+            className="flex h-[38px] w-full rounded-[8px] border border-border bg-card px-3 py-1.5 text-[14px] text-foreground placeholder:text-muted-foreground shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#76B900] focus:outline-none focus:ring-1 focus:ring-[#76B900]"
           />
         </div>
 
@@ -101,13 +101,13 @@ function SignInForm() {
           <div className="flex items-center justify-between">
             <label
               htmlFor="password"
-              className="block text-[13.5px] font-[500] text-[#111111]"
+              className="block text-[13.5px] font-[500] text-foreground"
             >
               Password
             </label>
             <Link
               href="/forgot-password"
-              className="text-[12.5px] font-[400] text-[#8A8A94] hover:text-[#111111] transition-colors"
+              className="text-[12.5px] font-[400] text-muted-foreground hover:text-foreground transition-colors"
             >
               Forgot password?
             </Link>
@@ -123,12 +123,12 @@ function SignInForm() {
         </div>
 
         <div className="flex items-center justify-between pt-1">
-          <label className="flex items-center gap-2 text-[13.5px] text-[#4B4B52] cursor-pointer">
+          <label className="flex items-center gap-2 text-[13.5px] text-muted-foreground cursor-pointer">
             <input
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="h-4 w-4 rounded border-[#D8D8DE] text-[#1FBF5B] focus:ring-[#1FBF5B]"
+              className="h-4 w-4 rounded border-border text-(--brand) focus:ring-[#76B900]"
             />
             <span>Remember this device</span>
           </label>
@@ -137,7 +137,7 @@ function SignInForm() {
         <button
           type="submit"
           disabled={loading}
-          className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-[#1FBF5B] text-[14.5px] font-[500] text-white hover:bg-[#1AA34D] transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
+          className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-(--brand) text-[14.5px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin text-white" />
@@ -154,7 +154,7 @@ function SignInForm() {
 
 export default function SignInPage() {
   return (
-    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-white" />}>
+    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-card" />}>
       <SignInForm />
     </Suspense>
   );

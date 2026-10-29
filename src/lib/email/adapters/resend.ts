@@ -7,7 +7,7 @@ export class ResendEmailAdapter implements EmailAdapter {
 
   constructor(apiKey: string, from?: string) {
     this.client = new Resend(apiKey);
-    this.from = from || process.env.EMAIL_FROM || "Repoverse <onboarding@resend.dev>";
+    this.from = from || process.env.EMAIL_FROM || "RepoPilot <onboarding@resend.dev>";
   }
 
   async send(payload: EmailPayload): Promise<EmailResult> {

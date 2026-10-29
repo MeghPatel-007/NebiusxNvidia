@@ -198,7 +198,7 @@ export function FAQsWithDashedLines({
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-4xl overflow-hidden px-4 py-20 md:px-8 md:py-32",
+        "mx-auto w-full max-w-4xl overflow-hidden px-4 py-20 sm:px-6 md:py-32 lg:px-8",
         className
       )}
     >
@@ -215,7 +215,7 @@ export function FAQsWithDashedLines({
 
       <div
         ref={containerRef}
-        className="relative mt-16 flex w-full flex-col gap-12 px-4 md:px-8"
+        className="relative mt-16 flex w-full flex-col gap-12"
       >
         {sections.map((section) => (
           <div key={section.title}>

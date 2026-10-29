@@ -69,20 +69,14 @@ export default function CanvasRevealEffectDemo({
     });
   }
 
-  // Constrain container max-width to number of columns so cards keep fixed proportion (~300px - 340px)
-  const maxContainerWidth = Math.min(
-    1280,
-    Math.max(340, effectiveCols * 320 + (effectiveCols - 1) * 16)
-  );
-
+  // Cards fill the shared container; heights keep the masonry rhythm.
   return (
-    <div className={cn("py-20 w-full mx-auto px-4 sm:px-6 lg:px-8", className)}>
+    <div className={cn("container-page py-20", className)}>
       <div
         className={cn(
-          "flex justify-center gap-4 mx-auto w-full",
+          "flex justify-center gap-4 w-full",
           effectiveCols > 2 ? "flex-col sm:flex-row" : "flex-row"
         )}
-        style={{ maxWidth: `${maxContainerWidth}px` }}
       >
         {columnsData.map((colCards, colIdx) => (
           <div
@@ -95,7 +89,6 @@ export default function CanvasRevealEffectDemo({
                 <Card
                   key={card.index}
                   title={CARD_TITLES[card.index % CARD_TITLES.length]}
-                  icon={<AceternityIcon />}
                   className={cn("w-full", card.heightClass)}
                 >
                   <CanvasRevealEffect
@@ -115,12 +108,10 @@ export default function CanvasRevealEffectDemo({
 
 export const Card = ({
   title,
-  icon,
   children,
   className,
 }: {
   title: string;
-  icon: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 }) => {
@@ -152,10 +143,7 @@ export const Card = ({
       </AnimatePresence>
 
       <div className="relative z-20">
-        <div className="text-center group-hover/canvas-card:-translate-y-4 group-hover/canvas-card:opacity-0 transition duration-200 w-full  mx-auto flex items-center justify-center">
-          {icon}
-        </div>
-        <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4  font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
+        <h2 className="dark:text-white text-xl opacity-100 pointer-fine:opacity-0 pointer-fine:group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
           {title}
         </h2>
       </div>

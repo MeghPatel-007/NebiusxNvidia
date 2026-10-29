@@ -7,7 +7,7 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export function ModeToggle({ className }: { className?: string }) {
+export function ModeToggle({ className, title }: { className?: string; title?: string }) {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 
@@ -19,6 +19,7 @@ export function ModeToggle({ className }: { className?: string }) {
     <Button
       variant="ghost"
       size="icon"
+      title={title}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(

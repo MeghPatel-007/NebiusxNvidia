@@ -88,7 +88,7 @@ function SignUpForm() {
           Already have an account?{" "}
           <Link
             href={`/sign-in${rawRedirect ? `?redirect=${encodeURIComponent(rawRedirect)}` : ""}`}
-            className="font-[500] text-[#1FBF5B] hover:underline"
+            className="font-[500] text-(--brand) hover:underline"
           >
             Sign in
           </Link>
@@ -101,7 +101,7 @@ function SignUpForm() {
         <div className="space-y-1.5">
           <label
             htmlFor="name"
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             Full Name
           </label>
@@ -113,14 +113,14 @@ function SignUpForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Jane Doe"
-            className="flex h-[38px] w-full rounded-[8px] border border-[#EBEBEF] bg-white px-3 py-1.5 text-[14px] text-[#111111] placeholder:text-[#8A8A94] shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#1FBF5B] focus:outline-none focus:ring-1 focus:ring-[#1FBF5B]"
+            className="flex h-[38px] w-full rounded-[8px] border border-border bg-card px-3 py-1.5 text-[14px] text-foreground placeholder:text-muted-foreground shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#76B900] focus:outline-none focus:ring-1 focus:ring-[#76B900]"
           />
         </div>
 
         <div className="space-y-1.5">
           <label
             htmlFor="email"
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             Work Email
           </label>
@@ -132,14 +132,14 @@ function SignUpForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="jane@company.com"
-            className="flex h-[38px] w-full rounded-[8px] border border-[#EBEBEF] bg-white px-3 py-1.5 text-[14px] text-[#111111] placeholder:text-[#8A8A94] shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#1FBF5B] focus:outline-none focus:ring-1 focus:ring-[#1FBF5B]"
+            className="flex h-[38px] w-full rounded-[8px] border border-border bg-card px-3 py-1.5 text-[14px] text-foreground placeholder:text-muted-foreground shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#76B900] focus:outline-none focus:ring-1 focus:ring-[#76B900]"
           />
         </div>
 
         <div className="space-y-1.5">
           <label
             htmlFor="password"
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             Password
           </label>
@@ -153,28 +153,28 @@ function SignUpForm() {
           />
 
           {password.length > 0 && (
-            <div className="mt-2 space-y-1 rounded-[8px] bg-[#F9F9FA] p-2.5 text-[12px] text-[#4B4B52]">
+            <div className="mt-2 space-y-1 rounded-[8px] bg-(--neutral-pill-bg) p-2.5 text-[12px] text-muted-foreground">
               <div className="flex items-center gap-1.5">
                 {strength.minLength ? (
-                  <Check className="h-3.5 w-3.5 text-[#22A646]" />
+                  <Check className="h-3.5 w-3.5 text-(--brand)" />
                 ) : (
-                  <X className="h-3.5 w-3.5 text-[#8A8A94]" />
+                  <X className="h-3.5 w-3.5 text-muted-foreground" />
                 )}
                 <span>At least 8 characters</span>
               </div>
               <div className="flex items-center gap-1.5">
                 {strength.hasLowercase && strength.hasUppercase ? (
-                  <Check className="h-3.5 w-3.5 text-[#22A646]" />
+                  <Check className="h-3.5 w-3.5 text-(--brand)" />
                 ) : (
-                  <X className="h-3.5 w-3.5 text-[#8A8A94]" />
+                  <X className="h-3.5 w-3.5 text-muted-foreground" />
                 )}
                 <span>Uppercase and lowercase letters</span>
               </div>
               <div className="flex items-center gap-1.5">
                 {strength.hasNumber || strength.hasSymbol ? (
-                  <Check className="h-3.5 w-3.5 text-[#22A646]" />
+                  <Check className="h-3.5 w-3.5 text-(--brand)" />
                 ) : (
-                  <X className="h-3.5 w-3.5 text-[#8A8A94]" />
+                  <X className="h-3.5 w-3.5 text-muted-foreground" />
                 )}
                 <span>At least one number or special symbol</span>
               </div>
@@ -185,7 +185,7 @@ function SignUpForm() {
         <div className="space-y-1.5">
           <label
             htmlFor="confirmPassword"
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             Confirm Password
           </label>
@@ -207,7 +207,7 @@ function SignUpForm() {
         <button
           type="submit"
           disabled={loading}
-          className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-[#1FBF5B] text-[14.5px] font-[500] text-white hover:bg-[#1AA34D] transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
+          className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-(--brand) text-[14.5px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin text-white" />
@@ -224,7 +224,7 @@ function SignUpForm() {
 
 export default function SignUpPage() {
   return (
-    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-white" />}>
+    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-card" />}>
       <SignUpForm />
     </Suspense>
   );

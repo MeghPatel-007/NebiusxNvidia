@@ -5,7 +5,7 @@
 **Product:** RepoPilot — Autonomous AI Repository Debugging Agent
 **Primary stack:** Next.js 16 App Router, TypeScript, Tailwind CSS v4, shadcn/ui
 **AI backend:** FastAPI + NVIDIA Nemotron via Nebius Token Factory
-**Reference:** User-provided Repoverse dashboard screenshot
+**Reference:** User-provided RepoPilot dashboard screenshot
 **Design direction:** Minimal, data-dense, premium engineering workspace
 **Priority:** Frontend quality, consistent interactions, accessibility, responsive behavior, and integration readiness
 
@@ -29,7 +29,7 @@ The product should communicate three things immediately:
 
 Design RepoPilot as a professional developer tool with the clarity of a modern Git platform, the density of an engineering analytics dashboard, and the usability of a polished SaaS application.
 
-Use the supplied Repoverse screenshot as the primary reference for:
+Use the supplied RepoPilot screenshot as the primary reference for:
 
 - Persistent left navigation.
 - Compact horizontal header.
@@ -41,7 +41,7 @@ Use the supplied Repoverse screenshot as the primary reference for:
 - Green accents for positive activity and successful states.
 - Data-rich tables and contribution-style heatmaps.
 
-Do not copy Repoverse branding, text, metrics, or unrelated business concepts.
+Do not copy RepoPilot branding, text, metrics, or unrelated business concepts.
 
 ## 1.3 Design principles
 
@@ -1423,6 +1423,6 @@ RepoPilot should feel like a serious developer engineering platform, not a colle
 
 The overview provides the system-wide picture. Repository pages provide codebase context. Agent Runs provide execution history. Run Details expose the engineering workflow. Benchmarks provide evidence of quality. Models & Usage explain the inference configuration. Settings control only the behavior the backend actually supports.
 
-Use the supplied Repoverse screenshot as the consistent visual north star throughout implementation.
+Use the supplied RepoPilot screenshot as the consistent visual north star throughout implementation.
 
 **The highest priority is not the number of pages. It is making every implemented page feel complete, consistent, responsive, and connected to the same real product workflow.**

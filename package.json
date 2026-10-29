@@ -34,6 +34,7 @@
     "motion": "^14.6.0",
     "next": "16.4.3",
     "next-themes": "^0.4.6",
+    "next-video": "^2.8.3",
     "octokit": "^5.0.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",

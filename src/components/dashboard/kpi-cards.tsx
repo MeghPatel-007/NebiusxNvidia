@@ -15,33 +15,33 @@ export function KpiCards({ metrics: _metrics }: KpiCardsProps) {
       caption: "Member Average",
       value: "65,4",
       change: "+21.8%",
-      pillClass: "bg-[#E6F8EA] text-[#22A646]",
+      pillClass: "bg-(--success-bg) text-(--success)",
     },
     {
       title: "Commit Rate",
       caption: "Member Average",
       value: "32,6",
       change: "0.0%",
-      pillClass: "bg-[#F6F6F8] text-[#111111] border border-[#EBEBEF]",
+      pillClass: "bg-(--neutral-pill-bg) text-foreground border border-border",
     },
     {
       title: "Hours Rate",
       caption: "Member Average",
       value: "35,6",
       change: "+12.0%",
-      pillClass: "bg-[#E6F8EA] text-[#22A646]",
+      pillClass: "bg-(--success-bg) text-(--success)",
     },
     {
       title: "Work Rate",
       caption: "Member Average",
       value: "31,1%",
       change: "-9.0%",
-      pillClass: "bg-[#FFE8EA] text-[#E5484D]",
+      pillClass: "bg-(--danger-bg) text-(--danger)",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-[#EBEBEF] bg-white py-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-border bg-card py-3">
       {cards.map((card, idx) => (
         <div
           key={idx}
@@ -49,25 +49,25 @@ export function KpiCards({ metrics: _metrics }: KpiCardsProps) {
         >
           {/* Row 1: Title + Three dots */}
           <div className="flex items-center justify-between">
-            <span className="text-[16.5px] font-[450] text-[#3A3A42]">
+            <span className="text-[16.5px] font-[450] text-foreground">
               {card.title}
             </span>
             <button
               aria-label="Options"
-              className="text-[#8A8A94] hover:text-[#111111] p-0.5 rounded transition-colors"
+              className="text-muted-foreground hover:text-foreground p-0.5 rounded transition-colors"
             >
               <MoreHorizontal className="h-5 w-5" strokeWidth={1.5} />
             </button>
           </div>
 
           {/* Row 2: Caption */}
-          <div className="text-[14.5px] font-[400] text-[#8A8A94]">
+          <div className="text-[14.5px] font-[400] text-muted-foreground">
             {card.caption}
           </div>
 
           {/* Row 3: Big Value + Delta Pill on shared baseline */}
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-[32px] font-[500] leading-none tracking-[-0.01em] text-[#111111]">
+            <span className="text-[32px] font-[500] leading-none tracking-[-0.01em] text-foreground">
               {card.value}
             </span>
 

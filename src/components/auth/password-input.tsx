@@ -21,7 +21,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-[13.5px] font-[500] text-[#111111]"
+            className="block text-[13.5px] font-[500] text-foreground"
           >
             {label}
           </label>
@@ -34,8 +34,8 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             aria-invalid={Boolean(error)}
             aria-describedby={errorId}
             className={cn(
-              "flex h-[38px] w-full rounded-[8px] border border-[#EBEBEF] bg-white px-3 py-1.5 text-[14px] text-[#111111] placeholder:text-[#8A8A94] shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#1FBF5B] focus:outline-none focus:ring-1 focus:ring-[#1FBF5B] disabled:cursor-not-allowed disabled:opacity-50 pr-10",
-              error && "border-[#E5484D] focus:border-[#E5484D] focus:ring-[#E5484D]",
+              "flex h-[38px] w-full rounded-[8px] border border-border bg-card px-3 py-1.5 text-[14px] text-foreground placeholder:text-muted-foreground shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-(--brand) focus:outline-none focus:ring-1 focus:ring-(--brand) disabled:cursor-not-allowed disabled:opacity-50 pr-10",
+              error && "border-(--danger) focus:border-(--danger) focus:ring-(--danger)",
               className
             )}
             {...props}
@@ -45,7 +45,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             tabIndex={-1}
             onClick={() => setShowPassword(!showPassword)}
             aria-label={showPassword ? "Hide password" : "Show password"}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8A8A94] hover:text-[#111111] transition-colors focus:outline-none"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors focus:outline-none"
           >
             {showPassword ? (
               <EyeOff className="h-4 w-4" strokeWidth={1.75} />
@@ -55,7 +55,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
           </button>
         </div>
         {error && (
-          <p id={errorId} className="text-[12.5px] text-[#E5484D] font-[400]">
+          <p id={errorId} className="text-[12.5px] text-(--danger) font-[400]">
             {error}
           </p>
         )}

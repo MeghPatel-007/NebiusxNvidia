@@ -17,7 +17,7 @@ export function SiteHeader({ title = "Dashboard" }: { title?: string }) {
         <h1 className="text-sm font-semibold tracking-tight text-foreground">{title}</h1>
       </div>
       <div className="flex items-center gap-2 px-4 lg:px-6">
-        <Badge variant="outline" className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 text-xs text-emerald-600 dark:text-emerald-400 border-emerald-500/20 bg-emerald-500/5">
+        <Badge variant="outline" className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 text-xs text-lime-600 dark:text-lime-400 border-lime-500/20 bg-lime-500/5">
           <SparklesIcon className="size-3" />
           Autonomous Engine Ready
         </Badge>

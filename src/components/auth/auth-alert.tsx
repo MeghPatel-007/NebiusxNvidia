@@ -13,15 +13,15 @@ export function AuthAlert({ type, message, className }: AuthAlertProps) {
 
   const styles = {
     error: {
-      bg: "bg-[#FFE8EA] border-[#FFD0D4] text-[#E5484D]",
+      bg: "bg-(--danger-bg) border-[#E5484D]/25 text-(--danger)",
       icon: AlertCircle,
     },
     success: {
-      bg: "bg-[#E6F8EA] border-[#C8F1D0] text-[#22A646]",
+      bg: "bg-(--success-bg) border-[#76B900]/25 text-(--success)",
       icon: CheckCircle2,
     },
     info: {
-      bg: "bg-[#F4F4F6] border-[#EBEBEF] text-[#4B4B52]",
+      bg: "bg-(--neutral-pill-bg) border-border text-muted-foreground",
       icon: Info,
     },
   }[type];

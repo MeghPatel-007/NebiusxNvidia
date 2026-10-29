@@ -45,8 +45,8 @@ export const defaultFooterColumns: FooterColumn[] = [
   {
     title: "Legal",
     links: [
-      { title: "Privacy Policy", href: "#" },
-      { title: "Terms of Service", href: "#" },
+      { title: "Privacy Policy", href: "/privacy" },
+      { title: "Terms of Service", href: "/terms" },
       { title: "Cookie Policy", href: "#" },
     ],
   },
@@ -55,7 +55,7 @@ export const defaultFooterColumns: FooterColumn[] = [
     links: [
       { title: "Sign Up", href: "/sign-up" },
       { title: "Login", href: "/sign-in" },
-      { title: "Forgot Password", href: "#" },
+      { title: "Forgot Password", href: "/forgot-password" },
     ],
   },
 ];
@@ -72,11 +72,11 @@ export function SimpleFooterWithFourGrids({
   return (
     <footer
       className={cn(
-        "relative w-full overflow-hidden border-t border-neutral-100 bg-white px-8 py-20 dark:border-white/[0.1] dark:bg-neutral-950",
+        "relative w-full overflow-hidden border-t border-neutral-100 bg-white py-20 dark:border-white/[0.1] dark:bg-neutral-950",
         className
       )}
     >
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between text-sm text-neutral-500 sm:flex-row md:px-8">
+      <div className="container-page flex flex-col items-start justify-between text-sm text-neutral-500 sm:flex-row">
         <div>
           <div className="mr-0 mb-4 md:mr-4 md:flex">
             <Link

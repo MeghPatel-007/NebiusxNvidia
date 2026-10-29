@@ -14,9 +14,9 @@ export function ActivityHeatmap({ days: _days }: ActivityHeatmapProps) {
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
 
-  // Heatmap ramp specified in design.md
-  // L0 #DFF7E3 · L1 #A3E9B5 · L2 #68DF87 · L3 #2FCB5A · L4 #22A646
-  const ramp = ["#DFF7E3", "#A3E9B5", "#68DF87", "#2FCB5A", "#22A646"];
+  // Heatmap ramp (L0..L4), theme tokens in globals.css (light + dark)
+  // L0 #EFF7DF/#0B2A12 · L1 #CDEF9E/#1C461F · L2 #A8E85A/#3D6B1F · L3 #8FD32E/#5C9319 · L4 #76B900
+  const ramp = ["var(--heat-0)", "var(--heat-1)", "var(--heat-2)", "var(--heat-3)", "var(--heat-4)"];
 
   const numRows = 6;
   const numCols = 29;
@@ -34,25 +34,25 @@ export function ActivityHeatmap({ days: _days }: ActivityHeatmapProps) {
   };
 
   return (
-    <div className="border-b border-[#EBEBEF] bg-white px-4 py-4 select-none">
+    <div className="border-b border-border bg-card px-4 py-4 select-none">
       {/* Header (Height: ~56px) */}
       <div className="flex h-[56px] items-center justify-between">
-        <h2 className="text-[22px] font-[500] tracking-[-0.01em] text-[#111111]">
+        <h2 className="text-[22px] font-[500] tracking-[-0.01em] text-foreground">
           Project Contributors
         </h2>
 
         <button
           onClick={() => setFilterMode(filterMode === "By Member" ? "By Repository" : "By Member")}
-          className="flex items-center gap-1.5 h-[28px] px-2.5 rounded-[8px] border border-[#EBEBEF] bg-white text-[14.5px] font-[400] text-[#111111] hover:bg-[#FAFAFB] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+          className="flex items-center gap-1.5 h-[28px] px-2.5 rounded-[8px] border border-border bg-card text-[14.5px] font-[400] text-foreground hover:bg-accent transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
         >
-          <Users className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+          <Users className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
           <span>{filterMode}</span>
-          <ChevronDown className="h-3.5 w-3.5 text-[#8A8A94]" strokeWidth={1.5} />
+          <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Month labels row */}
-      <div className="flex justify-between px-1 mb-2 text-[15px] font-[400] text-[#8A8A94]">
+      <div className="flex justify-between px-1 mb-2 text-[15px] font-[400] text-muted-foreground">
         {months.map((m) => (
           <span key={m}>{m}</span>
         ))}
@@ -80,13 +80,13 @@ export function ActivityHeatmap({ days: _days }: ActivityHeatmapProps) {
       </div>
 
       {/* Footer Legend */}
-      <div className="flex items-center justify-between pt-3 mt-1 text-[15px] text-[#8A8A94]">
+      <div className="flex items-center justify-between pt-3 mt-1 text-[15px] text-muted-foreground">
         {/* Left: How to Read Contribute ⓘ */}
-        <div className="flex items-center gap-1.5 text-[#111111]">
+        <div className="flex items-center gap-1.5 text-foreground">
           <span>How to Read Contribute</span>
-          <Info className="h-4 w-4 text-[#22A646]" strokeWidth={1.5} />
+          <Info className="h-4 w-4 text-(--heat-4)" strokeWidth={1.5} />
           {hoveredCell && (
-            <span className="ml-3 text-[14px] text-[#8A8A94]">
+            <span className="ml-3 text-[14px] text-muted-foreground">
               {hoveredCell.count} actions recorded
             </span>
           )}
@@ -96,11 +96,11 @@ export function ActivityHeatmap({ days: _days }: ActivityHeatmapProps) {
         <div className="flex items-center gap-2">
           <span>More</span>
           <div className="flex items-center gap-[6px]">
-            <span className="h-[14px] w-[14px] rounded-[5px] bg-[#22A646]" />
-            <span className="h-[14px] w-[14px] rounded-[5px] bg-[#2FCB5A]" />
-            <span className="h-[14px] w-[14px] rounded-[5px] bg-[#68DF87]" />
-            <span className="h-[14px] w-[14px] rounded-[5px] bg-[#A3E9B5]" />
-            <span className="h-[14px] w-[14px] rounded-[5px] bg-[#DFF7E3]" />
+            <span className="h-[14px] w-[14px] rounded-[5px] bg-(--heat-4)" />
+            <span className="h-[14px] w-[14px] rounded-[5px] bg-(--heat-3)" />
+            <span className="h-[14px] w-[14px] rounded-[5px] bg-(--heat-2)" />
+            <span className="h-[14px] w-[14px] rounded-[5px] bg-(--heat-1)" />
+            <span className="h-[14px] w-[14px] rounded-[5px] bg-(--heat-0)" />
           </div>
           <span>Less</span>
         </div>

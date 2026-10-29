@@ -18,7 +18,7 @@ export default async function OverviewPage() {
   const heatmapDays = generateActivityHeatmap();
 
   return (
-    <div className="flex flex-col flex-1 bg-white">
+    <div className="flex flex-col flex-1 bg-card">
       {/* Breadcrumb strip (Height: ~57px, hairline below) */}
       <RepoBreadcrumbs
         workspace="Vektora Space"

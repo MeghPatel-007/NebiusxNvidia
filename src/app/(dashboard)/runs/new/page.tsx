@@ -53,7 +53,7 @@ export default function NewDebugSessionPage() {
   };
 
   return (
-    <div className="flex flex-col flex-1 bg-white">
+    <div className="flex flex-col flex-1 bg-card">
       <RepoBreadcrumbs
         workspace="Vektora Space"
         repositoryName="New Debug Session"
@@ -64,48 +64,48 @@ export default function NewDebugSessionPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/runs"
-            className="flex h-[32px] w-[32px] items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[#8A8A94] hover:text-[#111111] transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+            className="flex h-[32px] w-[32px] items-center justify-center rounded-[8px] border border-border bg-card text-muted-foreground hover:text-foreground transition-colors shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={1.5} />
           </Link>
           <div>
-            <h1 className="text-[22px] font-[500] tracking-[-0.01em] text-[#111111]">
+            <h1 className="text-[22px] font-[500] tracking-[-0.01em] text-foreground">
               Launch New Debug Session
             </h1>
-            <p className="text-[14.5px] font-[400] text-[#8A8A94]">
+            <p className="text-[14.5px] font-[400] text-muted-foreground">
               Specify the target repository defect for autonomous diagnosis and patch verification.
             </p>
           </div>
         </div>
 
         {/* Model Card Banner */}
-        <div className="rounded-[10px] border border-[#A3E9B5] bg-[#E6F8EA] p-4 flex items-center justify-between">
+        <div className="rounded-[10px] border border-[#76B900]/30 bg-(--success-bg) p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-[#22A646] text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-(--brand) text-white">
               <Cpu className="h-5 w-5" strokeWidth={1.5} />
             </div>
             <div>
-              <div className="text-[15px] font-[500] text-[#111111]">
+              <div className="text-[15px] font-[500] text-foreground">
                 NVIDIA Nemotron via Nebius Token Factory
               </div>
-              <div className="text-[13px] text-[#22A646]">
+              <div className="text-[13px] text-(--brand)">
                 Hardware accelerated inference with automated test verification loop
               </div>
             </div>
           </div>
-          <span className="rounded-[6px] bg-white px-2.5 py-1 text-[12px] font-[500] text-[#22A646] shadow-[0_1px_2px_rgba(16,16,24,0.04)]">
+          <span className="rounded-[6px] bg-card px-2.5 py-1 text-[12px] font-[500] text-(--brand) shadow-[0_1px_2px_rgba(16,16,24,0.04)]">
             Active
           </span>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="rounded-[10px] border border-[#EBEBEF] bg-white p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-5">
+        <form onSubmit={handleSubmit} className="rounded-[10px] border border-border bg-card p-6 shadow-[0_1px_2px_rgba(16,16,24,0.04)] space-y-5">
           <div className="space-y-1.5">
-            <label className="text-[13px] font-[500] text-[#3A3A42]">Target Repository</label>
+            <label className="text-[13px] font-[500] text-foreground">Target Repository</label>
             <select
               value={repoId}
               onChange={(e) => setRepoId(e.target.value)}
-              className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
+              className="w-full h-[36px] rounded-[8px] border border-border bg-card px-3 text-[14px] text-foreground focus:border-[#76B900] focus:outline-none"
             >
               <option value="repo-1">Vektora / prime-marketplace-3.0</option>
               <option value="repo-2">Vektora / wesign-organization</option>
@@ -116,22 +116,22 @@ export default function NewDebugSessionPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[13px] font-[500] text-[#3A3A42]">Branch</label>
+              <label className="text-[13px] font-[500] text-foreground">Branch</label>
               <input
                 type="text"
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
                 placeholder="main"
-                className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
+                className="w-full h-[36px] rounded-[8px] border border-border bg-card px-3 text-[14px] text-foreground focus:border-[#76B900] focus:outline-none"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[13px] font-[500] text-[#3A3A42]">Model Selection</label>
+              <label className="text-[13px] font-[500] text-foreground">Model Selection</label>
               <select
                 value={modelUsed}
                 onChange={(e) => setModelUsed(e.target.value)}
-                className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
+                className="w-full h-[36px] rounded-[8px] border border-border bg-card px-3 text-[14px] text-foreground focus:border-[#76B900] focus:outline-none"
               >
                 <option value="nvidia/nemotron-4-340b-instruct">
                   nvidia/nemotron-4-340b-instruct (Recommended)
@@ -144,40 +144,40 @@ export default function NewDebugSessionPage() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-[500] text-[#3A3A42]">Session Title</label>
+            <label className="text-[13px] font-[500] text-foreground">Session Title</label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Fix signature deserialization panic on malformed payload"
-              className="w-full h-[36px] rounded-[8px] border border-[#EBEBEF] bg-white px-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
+              className="w-full h-[36px] rounded-[8px] border border-border bg-card px-3 text-[14px] text-foreground focus:border-[#76B900] focus:outline-none"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[13px] font-[500] text-[#3A3A42]">Bug Report / Issue Details</label>
+            <label className="text-[13px] font-[500] text-foreground">Bug Report / Issue Details</label>
             <textarea
               required
               rows={5}
               value={issueDescription}
               onChange={(e) => setIssueDescription(e.target.value)}
               placeholder="Provide error logs, reproduction steps, or the failing assertion description..."
-              className="w-full rounded-[8px] border border-[#EBEBEF] bg-white p-3 text-[14px] text-[#111111] focus:border-[#22A646] focus:outline-none"
+              className="w-full rounded-[8px] border border-border bg-card p-3 text-[14px] text-foreground focus:border-[#76B900] focus:outline-none"
             />
           </div>
 
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-[#EBEBEF]">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-border">
             <Link
               href="/runs"
-              className="flex items-center justify-center h-[34px] px-4 rounded-[10px] border border-[#EBEBEF] text-[14px] font-[400] text-[#111111] hover:bg-[#FAFAFB] transition-colors"
+              className="flex items-center justify-center h-[34px] px-4 rounded-[10px] border border-border text-[14px] font-[400] text-foreground hover:bg-accent transition-colors"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-2 h-[34px] px-4 rounded-[10px] bg-[#22A646] text-[14px] font-[500] text-white hover:bg-[#1f963f] transition-colors disabled:opacity-50 shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
+              className="flex items-center gap-2 h-[34px] px-4 rounded-[10px] bg-(--brand) text-[14px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors disabled:opacity-50 shadow-[0_1px_2px_rgba(16,16,24,0.04)]"
             >
               {loading ? (
                 <>

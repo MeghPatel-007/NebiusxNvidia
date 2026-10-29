@@ -1,5 +1,5 @@
 
-# design.md — Repoverse Dashboard UI (reference-derived)
+# design.md — RepoPilot Dashboard UI (reference-derived)
 
 Source of truth: `repo.png` (2048 × 1536, 2× retina capture → **divide all pixel values below by 2 for CSS px**; the design is a ~1024 CSS-px-wide crop of a larger desktop layout).
 Colors marked `sampled` were read from pixels; values marked `est.` are estimated from the screenshot; `inferred` = not visible in a static image.
@@ -31,7 +31,7 @@ Colors marked `sampled` were read from pixels; values marked `est.` are estimate
 | `foreground`                | `#111111` est.                     | Headings, KPI numerals, nav labels                                    |
 | `muted-foreground`          | `#8A8A94` est.                     | "Member Average", "Commit", month labels, section captions            |
 | `caption`                   | `#9A9AA3` est.                     | Sidebar group labels ("MY DASHBOARD", "CODE SPACE") — uppercase      |
-| `brand`                     | `#1FBF5B` est.                     | Repoverse logo + wordmark                                             |
+| `brand`                     | `#1FBF5B` est.                     | RepoPilot logo + wordmark                                             |
 | `success`                   | `#22A646` (sampled `#24A845`)    | Positive text, dark heatmap cell, check icons                         |
 | `success-bg`                | `#E6F8EA` est.                     | Positive delta pill background                                        |
 | `danger`                    | `#E5484D` est.                     | Negative text, "Decline"                                              |
@@ -124,11 +124,11 @@ Three-column app shell inside a full-viewport white window, **no outer margin in
 
 ### 3.1 Sidebar
 
-- Top: logo row (height 50, bottom hairline) — asterisk/burst glyph (24 px, brand green) + wordmark "Repoverse" (≈ 20 px / 500, brand green); right-aligned collapse button `ArrowLeftToLine`/`PanelLeftClose` 20 px, muted.
+- Top: logo row (height 50, bottom hairline) — asterisk/burst glyph (24 px, brand green) + wordmark "RepoPilot" (≈ 20 px / 500, brand green); right-aligned collapse button `ArrowLeftToLine`/`PanelLeftClose` 20 px, muted.
 - Group labels: uppercase, 12.5 px, `caption`, 16 px above first item, 8 px below. Groups: **MY DASHBOARD**, **CODE SPACE**, **USER PROFILE**.
 - Nav item: height 40, padding-x 12, radius 8, icon 20 px + 12 px gap + label 16 px. Default: foreground; hover: `bg-black/[0.03]`; **active** (Vektora/Marketplace in the screenshot): label weight 500, no filled background observed — use weight + full-opacity foreground. Focus: 2 px ring `ring-brand/40`.
 - **Projects** item has a trailing chevron-down (muted) and expands to sub-items indented 32 px with 24 px circular project avatars; sub-item text 15.5 px; active sub-item = foreground 500.
-- Footer: "REPOVERSE® COMMUNITY" tiny uppercase caption pinned bottom, 16 px inset.
+- Footer: "REPOPILOT® COMMUNITY" tiny uppercase caption pinned bottom, 16 px inset.
 
 ### 3.2 Page header (row 1)
 

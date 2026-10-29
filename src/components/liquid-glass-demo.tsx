@@ -2,9 +2,14 @@
 
 import { useRef } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
+import { Story_Script } from 'next/font/google'
 import { LiquidGlass } from '@/components/ui/liquid-glass'
-// import Video from 'next-video';
-// import myAwesomeVideo from '@/videos/hero-video.mp4';
+const myAwesomeVideo = '/videos/hero-video.mp4'
+
+const storyScript = Story_Script({
+  weight: '400',
+  display: 'swap',
+})
 
 type LiquidGlassDemoProps = {
   shape?: 'circle' | 'pill'
@@ -33,16 +38,19 @@ export default function LiquidGlassDemo({
       className="relative min-h-screen w-full overflow-hidden bg-neutral-900"
     >
       <video
-        src="assets/hero-video.mp4"
+        src={myAwesomeVideo}
         className="absolute inset-0 size-full object-cover"
         draggable={true}
         autoPlay
         muted
         loop
         playsInline
+        controls={false}
       />
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center p-8 text-center select-none">
-        <p className="text-6xl leading-[0.95] font-bold tracking-tighter text-white md:text-8xl">
+      <div className="pointer-events-none absolute inset-0 container-page flex flex-col items-center justify-center text-center select-none">
+        <p
+          className={`${storyScript.className} text-7xl leading-[0.95] font-bold tracking-tighter text-white md:text-[10rem]`}
+        >
           {['Repo', 'Pilot'].map((word, index) => (
             <motion.span
               key={word}

@@ -20,15 +20,15 @@ export function SectionCards({ metrics }: { metrics?: MetricSummary }) {
         <Card className="@container/card">
           <CardHeader>
             <CardDescription className="flex items-center gap-1.5">
-              <CheckCircle2Icon className="size-3.5 text-emerald-500" />
+              <CheckCircle2Icon className="size-3.5 text-lime-500" />
               Verified Fixes
             </CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
               {metrics.verifiedFixes}
             </CardTitle>
             <CardAction>
-              <Badge variant="outline" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-                <TrendingUpIcon className="size-3 text-emerald-500" />
+              <Badge variant="outline" className="border-lime-500/20 text-lime-600 dark:text-lime-400">
+                <TrendingUpIcon className="size-3 text-lime-500" />
                 +{metrics.verifiedFixesChange}%
               </Badge>
             </CardAction>
@@ -82,14 +82,14 @@ export function SectionCards({ metrics }: { metrics?: MetricSummary }) {
             </CardTitle>
             <CardAction>
               <Badge variant="outline" className="border-amber-500/20 text-amber-600 dark:text-amber-400">
-                <TrendingDownIcon className="size-3 text-emerald-500" />
+                <TrendingDownIcon className="size-3 text-lime-500" />
                 -{metrics.avgRepairTimeChange}%
               </Badge>
             </CardAction>
           </CardHeader>
           <CardFooter className="flex-col items-start gap-1.5 text-sm">
             <div className="line-clamp-1 flex gap-2 font-medium">
-              Faster turnaround cycle <TrendingDownIcon className="size-4 text-emerald-500" />
+              Faster turnaround cycle <TrendingDownIcon className="size-4 text-lime-500" />
             </div>
             <div className="text-muted-foreground">
               Ingestion to pull request

@@ -36,7 +36,7 @@ export function ContactFormGridWithDetails({
 }: ContactFormGridWithDetailsProps) {
   return (
     <div className={cn("flex min-h-full w-full items-center justify-center", className)}>
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-4 py-10 md:px-6 md:py-20 lg:grid-cols-2">
+      <div className="container-page grid grid-cols-1 gap-10 py-10 md:py-20 lg:grid-cols-2">
         <div className="relative flex flex-col items-center overflow-hidden lg:items-start">
           <h2 className="mt-9 bg-gradient-to-b from-neutral-800 to-neutral-900 bg-clip-text text-left text-xl font-bold text-transparent md:text-3xl lg:text-5xl dark:from-neutral-200 dark:to-neutral-300">
             {title}

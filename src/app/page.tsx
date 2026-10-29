@@ -9,7 +9,7 @@ import AboutUsSection11Demo from '@/components/about-us-section-11-demo'
 
 export default function Home() {
   return (
-    <>
+    <div className="landing-page">
       <NavbarDarkShadow />
       <div id="home" className="scroll-mt-24">
         <LandingHeroSection />
@@ -28,6 +28,6 @@ export default function Home() {
         <ContactFormGridWithDetailsDemo />
       </div>
       <SimpleFooterWithFourGridsDemo />
-    </>
+    </div>
   )
 }

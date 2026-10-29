@@ -5,7 +5,7 @@ Act as a senior product designer and staff-level Next.js engineer. Implement a p
 
 ## Design reference
 
-Use the supplied Repoverse dashboard screenshot as inspiration for layout and information hierarchy, not as a pixel-for-pixel copy.
+Use the supplied RepoPilot dashboard screenshot as inspiration for layout and information hierarchy, not as a pixel-for-pixel copy.
 
 Preserve these design characteristics:
 

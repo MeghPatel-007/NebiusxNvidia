@@ -113,8 +113,8 @@ function VerifyEmailContent() {
     return (
       <AuthCard title="Verifying your email" subtitle="Please wait while we confirm your account">
         <div className="flex flex-col items-center justify-center py-8 text-center space-y-3">
-          <Loader2 className="h-8 w-8 animate-spin text-[#1FBF5B]" />
-          <p className="text-[14px] text-[#8A8A94]">Verifying single-use token...</p>
+          <Loader2 className="h-8 w-8 animate-spin text-(--brand)" />
+          <p className="text-[14px] text-muted-foreground">Verifying single-use token...</p>
         </div>
       </AuthCard>
     );
@@ -128,23 +128,23 @@ function VerifyEmailContent() {
         subtitle="Your account is activated and ready to use"
         footer={
           <p>
-            Welcome to Repoverse!{" "}
-            <Link href="/overview" className="font-[500] text-[#1FBF5B] hover:underline">
+            Welcome to RepoPilot!{" "}
+            <Link href="/overview" className="font-[500] text-(--brand) hover:underline">
               Go to Dashboard
             </Link>
           </p>
         }
       >
         <div className="space-y-4 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#E6F8EA] text-[#22A646]">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-(--success-bg) text-(--brand)">
             <CheckCircle2 className="h-6 w-6" />
           </div>
-          <p className="text-[13.5px] leading-relaxed text-[#4B4B52]">
+          <p className="text-[13.5px] leading-relaxed text-muted-foreground">
             Your email address has been confirmed. You now have full access to repository inspection, benchmarking, and autonomous agent runs.
           </p>
           <Link
             href="/overview"
-            className="flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] bg-[#1FBF5B] text-[14.5px] font-[500] text-white hover:bg-[#1AA34D] transition-colors shadow-[0_1px_2px_rgba(31,191,91,0.2)] mt-2"
+            className="flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] bg-(--brand) text-[14.5px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors shadow-[0_1px_2px_rgba(31,191,91,0.2)] mt-2"
           >
             <span>Continue to Dashboard</span>
             <ArrowRight className="h-4 w-4" />
@@ -166,7 +166,7 @@ function VerifyEmailContent() {
       footer={
         <p>
           Already verified?{" "}
-          <Link href="/sign-in" className="font-[500] text-[#1FBF5B] hover:underline">
+          <Link href="/sign-in" className="font-[500] text-(--brand) hover:underline">
             Sign in
           </Link>
         </p>
@@ -177,15 +177,15 @@ function VerifyEmailContent() {
           <AuthAlert type="error" message={error} />
         ) : (
           <div className="flex flex-col items-center justify-center py-2 text-center space-y-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F4F4F6] text-[#1FBF5B]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-(--neutral-pill-bg) text-(--brand)">
               <Mail className="h-6 w-6" />
             </div>
             {emailParam && (
-              <p className="text-[14px] font-[500] text-[#111111]">
+              <p className="text-[14px] font-[500] text-foreground">
                 {emailParam}
               </p>
             )}
-            <p className="text-[13.5px] text-[#4B4B52] leading-relaxed max-w-[340px]">
+            <p className="text-[13.5px] text-muted-foreground leading-relaxed max-w-[340px]">
               Click the link in the message to activate your account. If you do not see it, check your spam or junk folder.
             </p>
           </div>
@@ -198,8 +198,8 @@ function VerifyEmailContent() {
           />
         )}
 
-        <form onSubmit={handleResend} className="space-y-3 pt-2 border-t border-[#EBEBEF]">
-          <p className="text-[13px] font-[500] text-[#111111]">
+        <form onSubmit={handleResend} className="space-y-3 pt-2 border-t border-border">
+          <p className="text-[13px] font-[500] text-foreground">
             Didn&apos;t receive the email?
           </p>
 
@@ -210,17 +210,17 @@ function VerifyEmailContent() {
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
               placeholder="Enter your email"
-              className="flex h-[38px] w-full rounded-[8px] border border-[#EBEBEF] bg-white px-3 py-1.5 text-[14px] text-[#111111] placeholder:text-[#8A8A94] shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#1FBF5B] focus:outline-none focus:ring-1 focus:ring-[#1FBF5B]"
+              className="flex h-[38px] w-full rounded-[8px] border border-border bg-card px-3 py-1.5 text-[14px] text-foreground placeholder:text-muted-foreground shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors focus:border-[#76B900] focus:outline-none focus:ring-1 focus:ring-[#76B900]"
             />
           )}
 
           <button
             type="submit"
             disabled={resending || cooldown > 0}
-            className="flex h-[38px] w-full items-center justify-center rounded-[8px] border border-[#EBEBEF] bg-white text-[13.5px] font-[500] text-[#111111] hover:bg-[#FAFAFB] hover:border-[#D8D8DE] transition-colors disabled:opacity-50"
+            className="flex h-[38px] w-full items-center justify-center rounded-[8px] border border-border bg-card text-[13.5px] font-[500] text-foreground hover:bg-accent hover:border-foreground/30 transition-colors disabled:opacity-50"
           >
             {resending ? (
-              <Loader2 className="h-4 w-4 animate-spin text-[#8A8A94]" />
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
             ) : cooldown > 0 ? (
               `Resend available in ${cooldown}s`
             ) : (
@@ -235,7 +235,7 @@ function VerifyEmailContent() {
 
 export default function VerifyEmailPage() {
   return (
-    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-white" />}>
+    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-card" />}>
       <VerifyEmailContent />
     </Suspense>
   );

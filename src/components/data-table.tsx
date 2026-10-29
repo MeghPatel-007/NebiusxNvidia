@@ -823,7 +823,7 @@ export function DataTable({
                 All sections verified and signed off as Done.
               </p>
             </div>
-            <Badge variant="outline" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+            <Badge variant="outline" className="border-lime-500/20 text-lime-600 dark:text-lime-400">
               {data.filter((item) => item.status === "Done").length} Completed
             </Badge>
           </div>
@@ -833,7 +833,7 @@ export function DataTable({
               .map((item) => (
                 <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 gap-2">
                   <div className="flex items-center gap-2">
-                    <CircleCheckIcon className="size-4 text-emerald-500 shrink-0" />
+                    <CircleCheckIcon className="size-4 text-lime-500 shrink-0" />
                     <span className="font-medium text-foreground">{item.header}</span>
                     <Badge variant="outline" className="text-[11px] px-1.5 py-0">{item.type}</Badge>
                   </div>
@@ -864,7 +864,7 @@ export function DataTable({
                 <div className="grid grid-cols-2 gap-2 pt-2 text-xs">
                   <div className="rounded-md border p-2 bg-muted/40">
                     <span className="text-muted-foreground block">Completed</span>
-                    <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{completed.length}</span>
+                    <span className="text-lg font-bold text-lime-600 dark:text-lime-400">{completed.length}</span>
                   </div>
                   <div className="rounded-md border p-2 bg-muted/40">
                     <span className="text-muted-foreground block">In Progress</span>

@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutGrid,
   Book,
@@ -19,102 +19,98 @@ import {
   PanelLeftClose,
   PanelLeft,
   LogOut,
-} from "lucide-react";
-import { useSidebarStore } from "@/lib/stores/sidebar-store";
-import { cn } from "@/lib/utils";
-import { authClient, signOut } from "@/lib/auth-client";
+} from 'lucide-react'
+import { useSidebarStore } from '@/lib/stores/sidebar-store'
+import { cn } from '@/lib/utils'
+import { authClient, signOut } from '@/lib/auth-client'
 
 export function AppSidebar() {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { data: session } = authClient.useSession();
-  const { isCollapsed, toggleSidebar } = useSidebarStore();
-  const [projectsOpen, setProjectsOpen] = useState(true);
+  const pathname = usePathname()
+  const router = useRouter()
+  const { data: session } = authClient.useSession()
+  const { isCollapsed, toggleSidebar } = useSidebarStore()
+  const [projectsOpen, setProjectsOpen] = useState(true)
 
   const handleSignOut = async () => {
     try {
       await signOut({
         fetchOptions: {
           onSuccess: () => {
-            router.push("/sign-in");
-            router.refresh();
+            router.push('/sign-in')
+            router.refresh()
           },
         },
-      });
+      })
     } catch {
-      router.push("/sign-in");
+      router.push('/sign-in')
     }
-  };
+  }
 
   const dashboardNav = [
-    { title: "Overview", href: "/overview", icon: LayoutGrid },
-    { title: "Repository", href: "/repositories", icon: Book },
-  ];
+    { title: 'Overview', href: '/overview', icon: LayoutGrid },
+    { title: 'Repository', href: '/repositories', icon: Book },
+  ]
 
   const codeSpaceNav = [
-    { title: "Database", href: "/overview#database", icon: Database },
-  ];
+    { title: 'Database', href: '/overview#database', icon: Database },
+  ]
 
   const secondaryCodeSpaceNav = [
-    { title: "Packages", href: "/overview#packages", icon: Package },
-    { title: "Member", href: "/runs", icon: Users },
-    { title: "Analytics", href: "/benchmarks", icon: BarChart3 },
-    { title: "Settings", href: "/settings", icon: Settings },
-  ];
+    { title: 'Packages', href: '/overview#packages', icon: Package },
+    { title: 'Member', href: '/runs', icon: Users },
+    { title: 'Analytics', href: '/benchmarks', icon: BarChart3 },
+    { title: 'Settings', href: '/settings', icon: Settings },
+  ]
 
   const userProfileNav = [
-    { title: "Profile", href: "/settings#profile", icon: CircleUser },
-    { title: "Work Preferences", href: "/settings#preferences", icon: Share2 },
-  ];
+    { title: 'Profile', href: '/settings#profile', icon: CircleUser },
+    { title: 'Work Preferences', href: '/settings#preferences', icon: Share2 },
+  ]
 
   const projects = [
     {
-      name: "Vektora/Marketplace",
-      href: "/repositories/repo-1",
-      badgeText: "V",
-      badgeBg: "bg-[#0E2A1F] text-[#1FBF5B]",
+      name: 'Vektora/Marketplace',
+      href: '/repositories/repo-1',
+      badgeText: 'V',
+      badgeBg: 'bg-[#0E2A1F] text-(--brand)',
     },
     {
-      name: "Odama/Company-Site",
-      href: "/repositories/repo-3",
-      badgeText: "O",
-      badgeBg: "bg-[#EA580C] text-white",
+      name: 'Odama/Company-Site',
+      href: '/repositories/repo-3',
+      badgeText: 'O',
+      badgeBg: 'bg-[#EA580C] text-white',
     },
     {
-      name: "Maryuandi/Mobile-App",
-      href: "/repositories/repo-4",
-      badgeText: "M",
-      badgeBg: "bg-[#2563EB] text-white",
+      name: 'Maryuandi/Mobile-App',
+      href: '/repositories/repo-4',
+      badgeText: 'M',
+      badgeBg: 'bg-[#2563EB] text-white',
     },
-  ];
+  ]
 
   return (
     <aside
       className={cn(
-        "relative flex flex-col shrink-0 border-r border-[#EBEBEF] bg-white transition-all duration-200 select-none",
-        isCollapsed ? "w-[64px]" : "w-[203px]"
+        'relative flex flex-col shrink-0 border-r border-border bg-card transition-all duration-200 select-none',
+        isCollapsed ? 'w-[64px]' : 'w-[203px]',
       )}
     >
       {/* Top Logo Row (Height: 50px, border-b hairline) */}
-      <div className="flex h-[50px] items-center justify-between px-3 border-b border-[#EBEBEF]">
+      <div className="flex h-[50px] items-center justify-between px-3 border-b border-border">
         {!isCollapsed && (
           <Link href="/overview" className="flex items-center gap-2 group">
-            {/* 8-pointed star/asterisk glyph 24px in brand green #1FBF5B */}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#1FBF5B"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="shrink-0"
-            >
-              <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14" />
-            </svg>
-            <span className="font-[500] text-[20px] tracking-tight text-[#1FBF5B]">
-              Repoverse
+            <img
+              src="/favicon.ico"
+              alt="RepoPilot"
+              width={28}
+              height={28}
+              className="shrink-0 transition-transform group-hover:rotate-45 duration-300"
+            />
+            <span className="font-[500] text-[20px] tracking-tight text-(--brand)">
+              Repo
+            </span>
+            <span className="font-[500] text-[20px] tracking-tight text-(--white)">
+              Pilot
             </span>
           </Link>
         )}
@@ -126,10 +122,11 @@ export function AppSidebar() {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#1FBF5B"
+              stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="text-(--brand)"
             >
               <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14" />
             </svg>
@@ -138,8 +135,8 @@ export function AppSidebar() {
 
         <button
           onClick={toggleSidebar}
-          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="text-[#8A8A94] hover:text-[#111111] p-1 rounded-md hover:bg-black/[0.03] transition-colors"
+          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          className="text-muted-foreground hover:text-foreground p-1 rounded-md hover:bg-accent transition-colors"
         >
           {isCollapsed ? (
             <PanelLeft className="h-5 w-5" strokeWidth={1.5} />
@@ -154,17 +151,17 @@ export function AppSidebar() {
         {/* Section: MY DASHBOARD */}
         <div>
           {!isCollapsed && (
-            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-[#9A9AA3] uppercase">
+            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-muted-foreground/70 uppercase">
               My Dashboard
             </div>
           )}
           <nav className="space-y-0.5">
             {dashboardNav.map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               const isActive =
-                item.href === "/overview"
-                  ? pathname === "/overview"
-                  : pathname.startsWith(item.href);
+                item.href === '/overview'
+                  ? pathname === '/overview'
+                  : pathname.startsWith(item.href)
 
               return (
                 <Link
@@ -172,17 +169,22 @@ export function AppSidebar() {
                   href={item.href}
                   title={isCollapsed ? item.title : undefined}
                   className={cn(
-                    "flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] transition-colors",
+                    'flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] transition-colors',
                     isActive
-                      ? "text-[#111111] font-[500] bg-black/[0.03]"
-                      : "text-[#111111] font-[400] hover:bg-black/[0.03]",
-                    isCollapsed && "justify-center px-0"
+                      ? 'text-foreground font-[500] bg-accent'
+                      : 'text-foreground font-[400] hover:bg-accent',
+                    isCollapsed && 'justify-center px-0',
                   )}
                 >
-                  <Icon className="h-5 w-5 text-[#111111] shrink-0" strokeWidth={1.5} />
-                  {!isCollapsed && <span className="truncate">{item.title}</span>}
+                  <Icon
+                    className="h-5 w-5 text-foreground shrink-0"
+                    strokeWidth={1.5}
+                  />
+                  {!isCollapsed && (
+                    <span className="truncate">{item.title}</span>
+                  )}
                 </Link>
-              );
+              )
             })}
           </nav>
         </div>
@@ -190,27 +192,32 @@ export function AppSidebar() {
         {/* Section: CODE SPACE */}
         <div>
           {!isCollapsed && (
-            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-[#9A9AA3] uppercase">
+            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-muted-foreground/70 uppercase">
               Code Space
             </div>
           )}
           <nav className="space-y-0.5">
             {codeSpaceNav.map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   title={isCollapsed ? item.title : undefined}
                   className={cn(
-                    "flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-[#111111] font-[400] hover:bg-black/[0.03] transition-colors",
-                    isCollapsed && "justify-center px-0"
+                    'flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-foreground font-[400] hover:bg-accent transition-colors',
+                    isCollapsed && 'justify-center px-0',
                   )}
                 >
-                  <Icon className="h-5 w-5 text-[#111111] shrink-0" strokeWidth={1.5} />
-                  {!isCollapsed && <span className="truncate">{item.title}</span>}
+                  <Icon
+                    className="h-5 w-5 text-foreground shrink-0"
+                    strokeWidth={1.5}
+                  />
+                  {!isCollapsed && (
+                    <span className="truncate">{item.title}</span>
+                  )}
                 </Link>
-              );
+              )
             })}
 
             {/* Collapsible Projects Row */}
@@ -218,45 +225,56 @@ export function AppSidebar() {
               <div>
                 <button
                   onClick={() => setProjectsOpen(!projectsOpen)}
-                  className="flex w-full items-center justify-between px-2 h-[40px] rounded-[8px] text-[15.5px] text-[#111111] font-[400] hover:bg-black/[0.03] transition-colors"
+                  className="flex w-full items-center justify-between px-2 h-[40px] rounded-[8px] text-[15.5px] text-foreground font-[400] hover:bg-accent transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <Layers className="h-5 w-5 text-[#111111] shrink-0" strokeWidth={1.5} />
+                    <Layers
+                      className="h-5 w-5 text-foreground shrink-0"
+                      strokeWidth={1.5}
+                    />
                     <span>Projects</span>
                   </div>
                   {projectsOpen ? (
-                    <ChevronDown className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+                    <ChevronDown
+                      className="h-4 w-4 text-muted-foreground"
+                      strokeWidth={1.5}
+                    />
                   ) : (
-                    <ChevronRight className="h-4 w-4 text-[#8A8A94]" strokeWidth={1.5} />
+                    <ChevronRight
+                      className="h-4 w-4 text-muted-foreground"
+                      strokeWidth={1.5}
+                    />
                   )}
                 </button>
 
                 {projectsOpen && (
                   <div className="mt-0.5 space-y-0.5">
                     {projects.map((proj) => {
-                      const isProjActive = pathname.includes(proj.href.split("/")[2]);
+                      const isProjActive = pathname.includes(
+                        proj.href.split('/')[2],
+                      )
                       return (
                         <Link
                           key={proj.name}
                           href={proj.href}
                           className={cn(
-                            "flex items-center gap-2.5 pl-6 pr-2 h-[36px] rounded-[8px] text-[14.5px] transition-colors",
+                            'flex items-center gap-2.5 pl-6 pr-2 h-[36px] rounded-[8px] text-[14.5px] transition-colors',
                             isProjActive
-                              ? "font-[500] text-[#111111] bg-black/[0.03]"
-                              : "font-[400] text-[#111111] hover:bg-black/[0.03]"
+                              ? 'font-[500] text-foreground bg-accent'
+                              : 'font-[400] text-foreground hover:bg-accent',
                           )}
                         >
                           <span
                             className={cn(
-                              "flex h-[22px] w-[22px] items-center justify-center rounded-full text-[11px] font-bold shrink-0",
-                              proj.badgeBg
+                              'flex h-[22px] w-[22px] items-center justify-center rounded-full text-[11px] font-bold shrink-0',
+                              proj.badgeBg,
                             )}
                           >
                             {proj.badgeText}
                           </span>
                           <span className="truncate">{proj.name}</span>
                         </Link>
-                      );
+                      )
                     })}
                   </div>
                 )}
@@ -264,8 +282,8 @@ export function AppSidebar() {
             ) : null}
 
             {secondaryCodeSpaceNav.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname.startsWith(item.href);
+              const Icon = item.icon
+              const isActive = pathname.startsWith(item.href)
 
               return (
                 <Link
@@ -273,17 +291,22 @@ export function AppSidebar() {
                   href={item.href}
                   title={isCollapsed ? item.title : undefined}
                   className={cn(
-                    "flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] transition-colors",
+                    'flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] transition-colors',
                     isActive
-                      ? "text-[#111111] font-[500] bg-black/[0.03]"
-                      : "text-[#111111] font-[400] hover:bg-black/[0.03]",
-                    isCollapsed && "justify-center px-0"
+                      ? 'text-foreground font-[500] bg-accent'
+                      : 'text-foreground font-[400] hover:bg-accent',
+                    isCollapsed && 'justify-center px-0',
                   )}
                 >
-                  <Icon className="h-5 w-5 text-[#111111] shrink-0" strokeWidth={1.5} />
-                  {!isCollapsed && <span className="truncate">{item.title}</span>}
+                  <Icon
+                    className="h-5 w-5 text-foreground shrink-0"
+                    strokeWidth={1.5}
+                  />
+                  {!isCollapsed && (
+                    <span className="truncate">{item.title}</span>
+                  )}
                 </Link>
-              );
+              )
             })}
           </nav>
         </div>
@@ -291,38 +314,46 @@ export function AppSidebar() {
         {/* Section: USER PROFILE */}
         <div>
           {!isCollapsed && (
-            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-[#9A9AA3] uppercase">
+            <div className="px-1 mb-2 text-[12.5px] font-[400] tracking-[0.02em] text-muted-foreground/70 uppercase">
               User Profile
             </div>
           )}
           <nav className="space-y-0.5">
             {userProfileNav.map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   title={isCollapsed ? item.title : undefined}
                   className={cn(
-                    "flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-[#111111] font-[400] hover:bg-black/[0.03] transition-colors",
-                    isCollapsed && "justify-center px-0"
+                    'flex items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-foreground font-[400] hover:bg-accent transition-colors',
+                    isCollapsed && 'justify-center px-0',
                   )}
                 >
-                  <Icon className="h-5 w-5 text-[#111111] shrink-0" strokeWidth={1.5} />
-                  {!isCollapsed && <span className="truncate">{item.title}</span>}
+                  <Icon
+                    className="h-5 w-5 text-foreground shrink-0"
+                    strokeWidth={1.5}
+                  />
+                  {!isCollapsed && (
+                    <span className="truncate">{item.title}</span>
+                  )}
                 </Link>
-              );
+              )
             })}
 
             <button
               onClick={handleSignOut}
-              title={isCollapsed ? "Sign Out" : undefined}
+              title={isCollapsed ? 'Sign Out' : undefined}
               className={cn(
-                "flex w-full items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-[#E5484D] font-[400] hover:bg-[#FFE8EA] transition-colors",
-                isCollapsed && "justify-center px-0"
+                'flex w-full items-center gap-3 px-2 h-[40px] rounded-[8px] text-[15.5px] text-(--danger) font-[400] hover:bg-(--danger-bg) transition-colors',
+                isCollapsed && 'justify-center px-0',
               )}
             >
-              <LogOut className="h-5 w-5 text-[#E5484D] shrink-0" strokeWidth={1.5} />
+              <LogOut
+                className="h-5 w-5 text-(--danger) shrink-0"
+                strokeWidth={1.5}
+              />
               {!isCollapsed && <span className="truncate">Sign Out</span>}
             </button>
           </nav>
@@ -331,18 +362,22 @@ export function AppSidebar() {
 
       {/* Pinned Footer Caption */}
       {!isCollapsed && (
-        <div className="p-3 border-t border-[#EBEBEF] text-[11px] font-[400] tracking-[0.02em] text-[#9A9AA3]">
+        <div className="p-3 border-t border-border text-[11px] font-[400] tracking-[0.02em] text-muted-foreground/70">
           {session?.user ? (
             <div className="truncate">
-              <span className="font-[500] text-[#111111]">{session.user.name}</span>
+              <span className="font-[500] text-foreground">
+                {session.user.name}
+              </span>
               <br />
-              <span className="text-[#8A8A94]">{session.user.email}</span>
+              <span className="text-muted-foreground">
+                {session.user.email}
+              </span>
             </div>
           ) : (
-            <span>Repoverse® Community</span>
+            <span>RepoPilot® Community</span>
           )}
         </div>
       )}
     </aside>
-  );
+  )
 }

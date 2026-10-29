@@ -75,11 +75,11 @@ export function NavbarDarkShadow({
         ease: "easeInOut",
       }}
       className={cn(
-        "fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none",
+        "fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none",
         className
       )}
     >
-      <div className="pointer-events-auto relative w-full max-w-5xl">
+      <div className="pointer-events-auto relative container-page">
         <LiquidGlass
           radius={20}
           bevelDepth={12}

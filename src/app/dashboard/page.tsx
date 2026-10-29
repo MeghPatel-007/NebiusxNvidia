@@ -73,7 +73,7 @@ export default async function DashboardPage() {
                 <h2 className="text-xl font-semibold tracking-tight text-foreground">
                   Welcome back, {userName}
                 </h2>
-                <Badge variant="outline" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 text-xs">
+                <Badge variant="outline" className="border-lime-500/20 text-lime-600 dark:text-lime-400 bg-lime-500/5 text-xs">
                   <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse mr-1" />
                   Live Sync
                 </Badge>
@@ -181,7 +181,7 @@ export default async function DashboardPage() {
                           variant="outline"
                           className={
                             repo.status === "active"
-                              ? "border-emerald-500/20 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 text-[11px]"
+                              ? "border-lime-500/20 text-lime-600 dark:text-lime-400 bg-lime-500/5 text-[11px]"
                               : "border-muted text-muted-foreground text-[11px]"
                           }
                         >

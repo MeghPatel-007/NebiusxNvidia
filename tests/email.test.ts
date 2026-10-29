@@ -19,7 +19,7 @@ describe("email service", () => {
 
     expect(template.subject).toContain("Verify your email");
     expect(template.html).toContain("https://repopilot.internal/verify-email?token=sec_tok_123");
-    expect(template.html).toContain("Repoverse");
+    expect(template.html).toContain("RepoPilot");
     expect(template.text).toContain("https://repopilot.internal/verify-email?token=sec_tok_123");
   });
 

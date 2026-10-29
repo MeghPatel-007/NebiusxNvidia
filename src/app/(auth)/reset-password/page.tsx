@@ -79,7 +79,7 @@ function ResetPasswordForm() {
         title="Invalid reset link"
         subtitle="The password recovery link is missing or malformed"
         footer={
-          <Link href="/forgot-password" className="font-[500] text-[#1FBF5B] hover:underline">
+          <Link href="/forgot-password" className="font-[500] text-(--brand) hover:underline">
             Request a new recovery link
           </Link>
         }
@@ -101,7 +101,7 @@ function ResetPasswordForm() {
       footer={
         <p>
           Remember your password?{" "}
-          <Link href="/sign-in" className="font-[500] text-[#1FBF5B] hover:underline">
+          <Link href="/sign-in" className="font-[500] text-(--brand) hover:underline">
             Sign in
           </Link>
         </p>
@@ -109,18 +109,18 @@ function ResetPasswordForm() {
     >
       {isSuccess ? (
         <div className="space-y-4 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#E6F8EA] text-[#22A646]">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-(--success-bg) text-(--brand)">
             <CheckCircle2 className="h-6 w-6" />
           </div>
-          <h3 className="text-[17px] font-[500] text-[#111111]">
+          <h3 className="text-[17px] font-[500] text-foreground">
             Password updated successfully
           </h3>
-          <p className="text-[13.5px] leading-relaxed text-[#4B4B52]">
+          <p className="text-[13.5px] leading-relaxed text-muted-foreground">
             Your password has been securely changed and prior sessions have been invalidated. You can now sign in with your new credentials.
           </p>
           <Link
             href="/sign-in"
-            className="flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] bg-[#1FBF5B] text-[14.5px] font-[500] text-white hover:bg-[#1AA34D] transition-colors shadow-[0_1px_2px_rgba(31,191,91,0.2)] mt-2"
+            className="flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] bg-(--brand) text-[14.5px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors shadow-[0_1px_2px_rgba(31,191,91,0.2)] mt-2"
           >
             <span>Sign In to Dashboard</span>
             <ArrowRight className="h-4 w-4" />
@@ -133,7 +133,7 @@ function ResetPasswordForm() {
           <div className="space-y-1.5">
             <label
               htmlFor="password"
-              className="block text-[13.5px] font-[500] text-[#111111]"
+              className="block text-[13.5px] font-[500] text-foreground"
             >
               New Password
             </label>
@@ -150,7 +150,7 @@ function ResetPasswordForm() {
           <div className="space-y-1.5">
             <label
               htmlFor="confirmPassword"
-              className="block text-[13.5px] font-[500] text-[#111111]"
+              className="block text-[13.5px] font-[500] text-foreground"
             >
               Confirm New Password
             </label>
@@ -172,7 +172,7 @@ function ResetPasswordForm() {
           <button
             type="submit"
             disabled={loading}
-            className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-[#1FBF5B] text-[14.5px] font-[500] text-white hover:bg-[#1AA34D] transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
+            className="flex h-[40px] w-full items-center justify-center rounded-[8px] bg-(--brand) text-[14.5px] font-[500] text-white hover:bg-[#76B900]/90 transition-colors disabled:opacity-60 shadow-[0_1px_2px_rgba(31,191,91,0.2)]"
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin text-white" />
@@ -188,7 +188,7 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-white" />}>
+    <Suspense fallback={<div className="h-[400px] w-[400px] animate-pulse rounded-xl bg-card" />}>
       <ResetPasswordForm />
     </Suspense>
   );
